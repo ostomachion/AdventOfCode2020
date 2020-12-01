@@ -8,22 +8,44 @@ namespace AdventOfCode2020
     {
         public static IEnumerable<int> ParseInput(string input) => input.Split('\n').Select(Int32.Parse);
 
+        private static IEnumerable<int> report = ParseInput(Input.Get(1));
+
         public static void Part1()
         {
-            var report = ParseInput(Input.Get(1));
-            var (i, j) = FindTwoTerms(report);
+            var (i, j) = FindTwoTerms(2020, report)!.Value;
             Console.WriteLine(i * j);
         }
 
-        public static (int, int) FindTwoTerms(IEnumerable<int> input)
+        public static void Part2()
         {
-            int i = input.First(x => input.Contains(2020 - x));
-            return (i, 2020 - i);
+            var (i, j, k) = FindThreeTerms(2020, report)!.Value;
+            Console.WriteLine(i * j * k);
         }
 
-        public static (int, int, int) FindThreeTerms(IEnumerable<int> input)
+        public static (int, int)? FindTwoTerms(int sum, IEnumerable<int> input)
         {
-            throw new NotImplementedException();
+            foreach (var i in input)
+            {
+                if (input.Contains(sum - i))
+                {
+                    return (i, sum - i);
+                }
+            }
+            return null;
+        }
+
+        public static (int, int, int)? FindThreeTerms(int sum, IEnumerable<int> input)
+        {
+            foreach (var i in input)
+            {
+                var test = FindTwoTerms(sum - i, input);
+                if (test.HasValue)
+                {
+                    var (j, k) = test.Value;
+                    return (i, j, k);
+                }
+            }
+            return null;
         }
     }
 }

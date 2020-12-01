@@ -18,7 +18,7 @@ namespace AdventOfCode2020Tests
 1456");
 
             // When
-            var (i, j) = Day01.FindTwoTerms(report);
+            var (i, j) = Day01.FindTwoTerms(2020, report)!.Value;
 
             // Then
             Assert.AreEqual(1721, i);
@@ -38,7 +38,7 @@ namespace AdventOfCode2020Tests
 1456");
 
             // When
-            var (i, j, k) = Day01.FindThreeTerms(report);
+            var (i, j, k) = Day01.FindThreeTerms(2020, report)!.Value;
 
             // Then
             Assert.AreEqual(979, i);
