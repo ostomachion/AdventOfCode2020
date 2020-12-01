@@ -11,14 +11,19 @@ namespace AdventOfCode2020
         public static void Part1()
         {
             var report = ParseInput(Input.Get(1));
-            var (i, j) = FindTerms(report);
+            var (i, j) = FindTwoTerms(report);
             Console.WriteLine(i * j);
         }
 
-        public static (int, int) FindTerms(IEnumerable<int> input)
+        public static (int, int) FindTwoTerms(IEnumerable<int> input)
         {
             int i = input.First(x => input.Contains(2020 - x));
             return (i, 2020 - i);
+        }
+
+        public static (int, int, int) FindThreeTerms(IEnumerable<int> input)
+        {
+            throw new NotImplementedException();
         }
     }
 }
