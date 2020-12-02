@@ -8,6 +8,7 @@ namespace AdventOfCode2020
     /// certain number of a specific character, or a
     /// character in a specific location.
     /// </summary>
+    /// <remarks>Used with <see cref="Day02"/>.</remarks>
     public class PasswordPolicy
     {
         /// <summary>

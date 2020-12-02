@@ -8,6 +8,7 @@ namespace AdventOfCode2020
     /// Represents a line from a password log, containing both the password
     /// policy and the password.
     /// </summary>
+    /// <remarks>Used with <see cref="Day02"/>.</remarks>
     public class PasswordLine
     {
         private static readonly Regex regex = new Regex(@"(?<min>\d+)-(?<max>\d+) (?<c>[a-z]): (?<pw>[a-z]+)");
