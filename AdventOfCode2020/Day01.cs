@@ -11,20 +11,20 @@ namespace AdventOfCode2020
         public static void Part1()
         {
             var report = ParseInput(Input.Get(1));
-            Console.WriteLine(FindTerms(2, report));
+            Console.WriteLine(FindProduct(2, report));
         }
 
         public static void Part2()
         {
             var report = ParseInput(Input.Get(1));
-            Console.WriteLine(FindTerms(3, report));
+            Console.WriteLine(FindProduct(3, report));
         }
 
-        public static int? FindTerms(int numberOfTerms, IEnumerable<int> input)
+        public static int? FindProduct(int numberOfTerms, IEnumerable<int> input)
         {
-            return FindTerms(numberOfTerms, 2020, input.ToArray(), new List<int>());
-            
-            static int? FindTerms(int numberOfTerms, int goalSum, ReadOnlySpan<int> input, List<int> terms)
+            return FindProduct(numberOfTerms, 2020, input.ToArray(), new List<int>());
+
+            static int? FindProduct(int numberOfTerms, int goalSum, ReadOnlySpan<int> input, List<int> terms)
             {
                 if (numberOfTerms == 0)
                 {
@@ -34,7 +34,7 @@ namespace AdventOfCode2020
                 for (var i = 0; i < input.Length; i++)
                 {
                     var term = input[i];
-                    var product = FindTerms(numberOfTerms - 1, goalSum - term, input[i..], terms);
+                    var product = FindProduct(numberOfTerms - 1, goalSum - term, input[i..], terms);
                     if (product is not null)
                     {
                         terms.Add(term);

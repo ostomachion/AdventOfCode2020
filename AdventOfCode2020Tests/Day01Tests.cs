@@ -14,7 +14,7 @@ namespace AdventOfCode2020Tests
             var report = Day01.ParseInput(Input.Get(1));
 
             // When
-            var product = Day01.FindTerms(2, report);
+            var product = Day01.FindProduct(2, report);
 
             // Then
             Assert.Equal(514579, product);
@@ -27,7 +27,7 @@ namespace AdventOfCode2020Tests
             var report = Day01.ParseInput(Input.Get(1));
 
             // When
-            var product = Day01.FindTerms(3,report);
+            var product = Day01.FindProduct(3,report);
 
             // Then
             Assert.Equal(241861950, product);
