@@ -1,3 +1,3 @@
 ﻿using AdventOfCode2020;
 
-Day01.Part2();
+Day02.Part1();

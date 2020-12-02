@@ -1,21 +1,25 @@
 using System;
+using System.Linq;
 
 namespace AdventOfCode2020
 {
     public class PasswordPolicy
     {
         public char RequiredCharacter { get; }
-        public Range Range { get; }
+        public int Min { get; }
+        public int Max {get;}
 
-        public PasswordPolicy(char requiredCharacter, Range range)
+        public PasswordPolicy(char requiredCharacter, int min, int max)
         {
             RequiredCharacter = requiredCharacter;
-            Range = range;
+            Min = min;
+            Max = max;
         }
 
         public bool Check(string password)
         {
-            throw new NotImplementedException();
+            var count = password.Count(c => c == RequiredCharacter);
+            return count >= Min && count <= Max;
         }
     }
 }
