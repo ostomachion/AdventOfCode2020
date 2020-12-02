@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode2020
 {
@@ -9,7 +11,7 @@ namespace AdventOfCode2020
         /// </summary>
         /// <param name="input">The input string.</param>
         /// <returns></returns>
-        public static void ParseInput(string input) => throw new NotImplementedException();
+        public static IEnumerable<PasswordLine> ParseInput(string input) => Input.GetLines(2).Select(PasswordLine.Parse);
 
         /// <summary>
         /// https://adventofcode.com/2020/day/2

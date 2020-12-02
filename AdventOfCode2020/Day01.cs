@@ -12,14 +12,14 @@ namespace AdventOfCode2020
         /// </summary>
         /// <param name="input">The input string.</param>
         /// <returns>A collection of positive integers.</returns>
-        public static IEnumerable<int> ParseInput(string input) => input.Split('\n').Select(Int32.Parse);
+        public static IEnumerable<int> ParseInput(string[] input) => input.Select(Int32.Parse);
 
         /// <summary>
         /// https://adventofcode.com/2020/day/1
         /// </summary>
         public static void Part1()
         {
-            var report = ParseInput(Input.Get(1));
+            var report = ParseInput(Input.GetLines(1));
             Console.WriteLine(FindProduct(2, report));
         }
 
@@ -28,7 +28,7 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            var report = ParseInput(Input.Get(1));
+            var report = ParseInput(Input.GetLines(1));
             Console.WriteLine(FindProduct(3, report));
         }
 
