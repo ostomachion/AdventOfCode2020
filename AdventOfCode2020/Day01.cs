@@ -12,39 +12,30 @@ namespace AdventOfCode2020
 
         public static void Part1()
         {
-            var (i, j) = FindTwoTerms(2020, report)!.Value;
-            Console.WriteLine(i * j);
+            var result = FindTerms(2, 2020, report)!.ToArray();
+            Console.WriteLine(result[0] * result[1]);
         }
 
         public static void Part2()
         {
-            var (i, j, k) = FindThreeTerms(2020, report)!.Value;
-            Console.WriteLine(i * j * k);
+            var result = FindTerms(3, 2020, report)!.ToArray();
+            Console.WriteLine(result[0] * result[1] * result[2]);
         }
 
-        public static (int, int)? FindTwoTerms(int sum, IEnumerable<int> input)
+        public static IEnumerable<int>? FindTerms(int numberOfTerms, int goalSum, IEnumerable<int> input)
         {
-            foreach (var i in input)
+            if (numberOfTerms == 0)
             {
-                if (input.Contains(sum - i))
-                {
-                    return (i, sum - i);
-                }
+                return goalSum == 0 ? Enumerable.Empty<int>() : null;
             }
-            return null;
-        }
 
-        public static (int, int, int)? FindThreeTerms(int sum, IEnumerable<int> input)
-        {
-            foreach (var i in input)
+            foreach (var item in input)
             {
-                var test = FindTwoTerms(sum - i, input);
-                if (test.HasValue)
-                {
-                    var (j, k) = test.Value;
-                    return (i, j, k);
-                }
+                var test = FindTerms(numberOfTerms - 1, goalSum - item, input.Except(new[] { item }));
+                if (test is not null)
+                    return new[] { item }.Concat(test);
             }
+
             return null;
         }
     }
