@@ -10,7 +10,14 @@ namespace AdventOfCode2020Tests
         [Fact]
         public void Part1Test()
         {
-            throw new NotImplementedException();
+            // Given
+            var list = Input.GetLines(2).Select(PasswordLine.Parse);
+
+            // When
+            var results = list.Select(x => x.Policy.Check(x.Password));
+
+            // Then
+            Assert.Equal(results, new[] { true, false, true });
         }
 
         [Fact]
