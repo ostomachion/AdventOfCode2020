@@ -24,7 +24,7 @@ namespace AdventOfCode2020
 
         public bool NewSystemCheck(string password)
         {
-            throw new NotImplementedException();
+            return (password[Min - 1] == RequiredCharacter) ^ (password[Max - 1] == RequiredCharacter);
         }
     }
 }
