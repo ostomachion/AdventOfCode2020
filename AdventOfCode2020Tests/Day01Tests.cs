@@ -11,7 +11,7 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
-            var report = new ReadOnlySpan<int>(Day01.ParseInput(Input.Get(1)).ToArray());
+            var report = Day01.ParseInput(Input.Get(1));
 
             // When
             var product = Day01.FindTerms(2, 2020, report, out var terms);
@@ -27,7 +27,7 @@ namespace AdventOfCode2020Tests
         public void Part2Test()
         {
             // Given
-            var report = new ReadOnlySpan<int>(Day01.ParseInput(Input.Get(1)).ToArray());
+            var report = Day01.ParseInput(Input.Get(1));
 
             // When
             var product = Day01.FindTerms(3, 2020, report, out var terms);
