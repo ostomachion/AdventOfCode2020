@@ -35,7 +35,8 @@ namespace AdventOfCode2020
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="PasswordLine"/> from a line in a password file.
+        /// Creates an instance of <see cref="PasswordLine"/> from a line in a
+        /// password file.
         /// </summary>
         /// <param name="line">The line from a password file.</param>
         /// <returns>The parsed <see cref="PasswordLine"/></returns>

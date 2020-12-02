@@ -26,8 +26,8 @@ namespace AdventOfCode2020
         }
 
         /// <summary>
-        /// Returns the product of <paramref name="numberOfTerms"/> distinct values
-        /// from <paramref name="input"/> which sum to 2020.
+        /// Returns the product of <paramref name="numberOfTerms"/> distinct
+        /// values from <paramref name="input"/> which sum to 2020.
         /// </summary>
         /// <param name="numberOfTerms">The number of terms to look for.</param>
         /// <param name="input">The list of positive integers to choose from.</param>

@@ -4,9 +4,8 @@ using System.Linq;
 namespace AdventOfCode2020
 {
     /// <summary>
-    /// Represents a password policy requiring either a
-    /// certain number of a specific character, or a
-    /// character in a specific location.
+    /// Represents a password policy requiring either a certain number of a
+    /// specific character, or a character in a specific location.
     /// </summary>
     /// <remarks>Used with <see cref="Day02"/>.</remarks>
     public class PasswordPolicy
@@ -17,9 +16,9 @@ namespace AdventOfCode2020
         public char RequiredCharacter { get; }
 
         /// <summary>
-        /// Either the minimum number of times the character may
-        /// appear in the password, or one of the indexes that
-        /// the character may appear in, depending on the policy.
+        /// Either the minimum number of times the character may appear in the
+        /// password, or one of the indexes that the character may appear in,
+        /// depending on the policy.
         /// </summary>
         public int Min { get; }
 
