@@ -8,18 +8,11 @@ namespace AdventOfCode2020
     public static class Day01
     {
         /// <summary>
-        /// Converts a string containing a positive integer on each line to an <see cref="IEnumerable{T}"/>.
-        /// </summary>
-        /// <param name="input">The input string.</param>
-        /// <returns>A collection of positive integers.</returns>
-        public static IEnumerable<int> ParseInput(string[] input) => input.Select(Int32.Parse);
-
-        /// <summary>
         /// https://adventofcode.com/2020/day/1
         /// </summary>
         public static void Part1()
         {
-            var report = ParseInput(Input.GetLines(1));
+            var report = Input.GetLines(1).Select(Int32.Parse);
             Console.WriteLine(FindProduct(2, report));
         }
 
@@ -28,7 +21,7 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            var report = ParseInput(Input.GetLines(1));
+            var report = Input.GetLines(1).Select(Int32.Parse);
             Console.WriteLine(FindProduct(3, report));
         }
 

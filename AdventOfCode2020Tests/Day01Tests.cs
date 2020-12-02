@@ -11,7 +11,7 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
-            var report = Day01.ParseInput(Input.GetLines(1));
+            var report = Input.GetLines(1).Select(Int32.Parse);
 
             // When
             var product = Day01.FindProduct(2, report);
@@ -24,8 +24,8 @@ namespace AdventOfCode2020Tests
         public void Part2Test()
         {
             // Given
-            var report = Day01.ParseInput(Input.GetLines(1));
-
+            var report = Input.GetLines(1).Select(Int32.Parse);
+            
             // When
             var product = Day01.FindProduct(3,report);
 
