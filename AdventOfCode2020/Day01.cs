@@ -11,20 +11,18 @@ namespace AdventOfCode2020
         public static void Part1()
         {
             var report = ParseInput(Input.Get(1));
-            Console.WriteLine(FindTerms(2, 2020, report, out _));
+            Console.WriteLine(FindTerms(2, report));
         }
 
         public static void Part2()
         {
             var report = ParseInput(Input.Get(1));
-            Console.WriteLine(FindTerms(3, 2020, report, out _));
+            Console.WriteLine(FindTerms(3, report));
         }
 
-        public static int? FindTerms(int numberOfTerms, int goalSum, IEnumerable<int> input, out IEnumerable<int>? terms) {
+        public static int? FindTerms(int numberOfTerms, IEnumerable<int> input) {
             var list = new List<int>();
-            var value = FindTerms(numberOfTerms, goalSum, input.ToArray(), list);
-            list.Reverse();
-            terms = list;
+            var value = FindTerms(numberOfTerms, 2020, input.ToArray(), list);
             return value;
         }
 

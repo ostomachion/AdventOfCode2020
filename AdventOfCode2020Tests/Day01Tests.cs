@@ -14,12 +14,9 @@ namespace AdventOfCode2020Tests
             var report = Day01.ParseInput(Input.Get(1));
 
             // When
-            var product = Day01.FindTerms(2, 2020, report, out var terms);
+            var product = Day01.FindTerms(2, report);
 
             // Then
-            Assert.Collection(terms,
-                term => Assert.Equal(1721, term),
-                term => Assert.Equal(299, term));
             Assert.Equal(514579, product);
         }
 
@@ -30,13 +27,9 @@ namespace AdventOfCode2020Tests
             var report = Day01.ParseInput(Input.Get(1));
 
             // When
-            var product = Day01.FindTerms(3, 2020, report, out var terms);
+            var product = Day01.FindTerms(3,report);
 
             // Then
-            Assert.Collection(terms,
-                term => Assert.Equal(979, term),
-                term => Assert.Equal(366, term),
-                term => Assert.Equal(675, term));
             Assert.Equal(241861950, product);
         }
     }
