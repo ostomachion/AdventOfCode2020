@@ -21,7 +21,9 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            throw new NotImplementedException();
+            var list = Input.GetLines(2).Select(PasswordLine.Parse);
+
+            Console.WriteLine(list.Count(x => x.Policy.NewSystemCheck(x.Password)));
         }
     }
 }
