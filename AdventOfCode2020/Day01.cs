@@ -20,31 +20,30 @@ namespace AdventOfCode2020
             Console.WriteLine(FindTerms(3, report));
         }
 
-        public static int? FindTerms(int numberOfTerms, IEnumerable<int> input) {
-            var list = new List<int>();
-            var value = FindTerms(numberOfTerms, 2020, input.ToArray(), list);
-            return value;
-        }
-
-        private static int? FindTerms(int numberOfTerms, int goalSum, ReadOnlySpan<int> input, List<int> terms)
+        public static int? FindTerms(int numberOfTerms, IEnumerable<int> input)
         {
-            if (numberOfTerms == 0)
+            return FindTerms(numberOfTerms, 2020, input.ToArray(), new List<int>());
+            
+            static int? FindTerms(int numberOfTerms, int goalSum, ReadOnlySpan<int> input, List<int> terms)
             {
-                return goalSum == 0 ? 1 : null;
-            }
-
-            for (var i = 0; i < input.Length; i++)
-            {
-                var term = input[i];
-                var product = FindTerms(numberOfTerms - 1, goalSum - term, input[i..], terms);
-                if (product is not null)
+                if (numberOfTerms == 0)
                 {
-                    terms.Add(term);
-                    return product * term;
+                    return goalSum == 0 ? 1 : null;
                 }
-            }
 
-            return null;
+                for (var i = 0; i < input.Length; i++)
+                {
+                    var term = input[i];
+                    var product = FindTerms(numberOfTerms - 1, goalSum - term, input[i..], terms);
+                    if (product is not null)
+                    {
+                        terms.Add(term);
+                        return product * term;
+                    }
+                }
+
+                return null;
+            }
         }
     }
 }
