@@ -48,7 +48,7 @@ namespace AdventOfCode2020
         /// at least <see cref="Min"/> times and at most <see cref="Max"/>
         /// times (inclusive).
         /// </summary>
-        /// <param name="password">The password to check</param>
+        /// <param name="password">The password to check.</param>
         /// <returns>
         /// Whether the given password contains the required character
         /// at least <see cref="Min"/> times and at most <see cref="Max"/>
@@ -68,7 +68,7 @@ namespace AdventOfCode2020
         /// at either index <see cref="Min"/> or index <see cref="Max"/>
         /// (where 1 is the first position), but not both.
         /// </summary>
-        /// <param name="password">The password to check</param>
+        /// <param name="password">The password to check.</param>
         /// <returns>
         /// Whether the given password contains the required character
         /// at either index <see cref="Min"/> or index <see cref="Max"/>
