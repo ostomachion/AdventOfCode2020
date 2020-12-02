@@ -27,11 +27,14 @@ namespace AdventOfCode2020
 
         /// <summary>
         /// Returns the product of <paramref name="numberOfTerms"/> distinct
-        /// values from <paramref name="input"/> which sum to 2020.
+        /// values from <paramref name="input"/> which sum to 2020. Returns 0 if
+        /// no sum is exists.
         /// </summary>
         /// <param name="numberOfTerms">The number of terms to look for.</param>
         /// <param name="input">The list of positive integers to choose from.</param>
-        /// <returns>The product of the terms which sum to 2020.</returns>
+        /// <returns>
+        /// The product of the terms which sum to 2020, or 0 if no sum exists.
+        /// </returns>
         public static BigInteger FindProduct(int numberOfTerms, IEnumerable<int> input)
         {
             if (input.Any(x => x < 0))
@@ -43,6 +46,8 @@ namespace AdventOfCode2020
             {
                 if (numberOfTerms == 0)
                 {
+                    // 0 represents no solution.
+                    // 1 represents the empty product, a product of the 0 terms that sum to the goal (0).
                     return goalSum == 0 ? 1 : 0;
                 }
 
