@@ -7,7 +7,7 @@ namespace AdventOfCode2020
     {
         public char RequiredCharacter { get; }
         public int Min { get; }
-        public int Max {get;}
+        public int Max { get; }
 
         public PasswordPolicy(char requiredCharacter, int min, int max)
         {
@@ -16,10 +16,15 @@ namespace AdventOfCode2020
             Max = max;
         }
 
-        public bool Check(string password)
+        public bool OldSystemCheck(string password)
         {
             var count = password.Count(c => c == RequiredCharacter);
             return count >= Min && count <= Max;
+        }
+
+        public bool NewSystemCheck(string password)
+        {
+            throw new NotImplementedException();
         }
     }
 }

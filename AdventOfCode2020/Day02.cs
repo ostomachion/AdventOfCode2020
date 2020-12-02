@@ -13,7 +13,7 @@ namespace AdventOfCode2020
         {
             var list = Input.GetLines(2).Select(PasswordLine.Parse);
 
-            System.Console.WriteLine(list.Count(x => x.Policy.Check(x.Password)));
+            Console.WriteLine(list.Count(x => x.Policy.OldSystemCheck(x.Password)));
         }
 
         /// <summary>
