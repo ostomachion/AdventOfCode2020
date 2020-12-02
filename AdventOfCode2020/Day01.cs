@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace AdventOfCode2020
 {
@@ -20,29 +21,31 @@ namespace AdventOfCode2020
             Console.WriteLine(FindProduct(3, report));
         }
 
-        public static int? FindProduct(int numberOfTerms, IEnumerable<int> input)
+        public static BigInteger FindProduct(int numberOfTerms, IEnumerable<int> input)
         {
-            return FindProduct(numberOfTerms, 2020, input.ToArray(), new List<int>());
+            return FindProduct(numberOfTerms, 2020, input.ToArray());
 
-            static int? FindProduct(int numberOfTerms, int goalSum, ReadOnlySpan<int> input, List<int> terms)
+            static BigInteger FindProduct(int numberOfTerms, int goalSum, ReadOnlySpan<int> input)
             {
                 if (numberOfTerms == 0)
                 {
-                    return goalSum == 0 ? 1 : null;
+                    return goalSum == 0 ? 1 : 0;
                 }
 
                 for (var i = 0; i < input.Length; i++)
                 {
                     var term = input[i];
-                    var product = FindProduct(numberOfTerms - 1, goalSum - term, input[i..], terms);
-                    if (product is not null)
+                    if (term <= goalSum)
                     {
-                        terms.Add(term);
-                        return product * term;
+                        var product = FindProduct(numberOfTerms - 1, goalSum - term, input[(i + 1)..]);
+                        if (!product.IsZero)
+                        {
+                            return product * term;
+                        }
                     }
                 }
 
-                return null;
+                return 0;
             }
         }
     }
