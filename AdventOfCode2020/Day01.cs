@@ -10,8 +10,8 @@ namespace AdventOfCode2020
         /// <summary>
         /// Converts a string containing a positive integer on each line to an <see cref="IEnumerable{T}"/>.
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
+        /// <param name="input">The input string.</param>
+        /// <returns>A collection of positive integers.</returns>
         public static IEnumerable<int> ParseInput(string input) => input.Split('\n').Select(Int32.Parse);
 
         /// <summary>
