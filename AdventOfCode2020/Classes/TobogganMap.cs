@@ -97,7 +97,7 @@ namespace AdventOfCode2020
             if (width == 0)
                 throw new ArgumentException(nameof(input), "Map width must be greater than 0.");
 
-            TobogganMapTile[,] trees = new TobogganMapTile[width, lines.Length];
+            var trees = new TobogganMapTile[width, lines.Length];
             for (int y = 0; y < lines.Length; y++)
             {
                 for (int x = 0; x < width; x++)
