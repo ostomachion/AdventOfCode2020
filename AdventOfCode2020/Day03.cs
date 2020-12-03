@@ -11,7 +11,11 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            throw new NotImplementedException();
+            var map = TobogganMap.Parse(Input.Get(3));
+            var path = map.GetPath(3);
+            var trees = path.Count(x => x == TobogganMapTile.Tree);
+
+            Console.WriteLine(trees);
         }
 
         /// <summary>

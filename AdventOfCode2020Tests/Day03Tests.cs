@@ -11,11 +11,14 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
+            var map = TobogganMap.Parse(Input.Get(3));
 
             // When
+            var path = map.GetPath(3);
+            var trees = path.Count(x => x == TobogganMapTile.Tree);
 
             // Then
-            throw new NotImplementedException();
+            Assert.Equal(7, trees);
         }
 
         [Fact]
