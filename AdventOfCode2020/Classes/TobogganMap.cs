@@ -27,10 +27,10 @@ namespace AdventOfCode2020
             this.map = map;
         }
 
-        public TobogganMapTile[] GetPath(int dx)
+        public TobogganMapTile[] GetPath(int dx, int dy)
         {
-            return Enumerable.Range(0, this.map.GetLength(1))
-                .Select(i => this[i * dx, i])
+            return Enumerable.Range(0, this.map.GetLength(1) / dy)
+                .Select(i => this[i * dx, i * dy])
                 .ToArray();
         }
 
