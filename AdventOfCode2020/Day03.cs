@@ -19,7 +19,7 @@ namespace AdventOfCode2020
         }
 
         /// <summary>
-        /// https://adventofcode.com/2020/day/2#part3
+        /// https://adventofcode.com/2020/day/3#part2
         /// </summary>
         public static void Part2()
         {
