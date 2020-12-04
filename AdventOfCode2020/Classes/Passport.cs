@@ -10,8 +10,8 @@ namespace AdventOfCode2020
         public string? Height { get; private set; }
         public string? HairColor { get; private set; }
         public string? EyeColor { get; private set; }
-        public int? PassportId { get; private set; }
-        public int? CountryId { get; private set; }
+        public string? PassportId { get; private set; }
+        public string? CountryId { get; private set; }
 
         public bool IsValid =>
             BirthYear is not null &&
@@ -21,7 +21,7 @@ namespace AdventOfCode2020
             HairColor is not null &&
             EyeColor is not null &&
             PassportId is not null;
-            
+
         public static Passport Parse(string text)
         {
             var passport = new Passport();
@@ -82,17 +82,13 @@ namespace AdventOfCode2020
                     case "pid":
                         if (passport.PassportId is not null)
                             throw new ArgumentException($"Duplicate key '{key}'.", nameof(text));
-                        if (!int.TryParse(value, out var pid))
-                            throw new ArgumentException($"Invalid value for '{key}'.", nameof(text));
-                        passport.PassportId = pid;
+                        passport.PassportId = value;
                         break;
 
                     case "cid":
                         if (passport.CountryId is not null)
                             throw new ArgumentException($"Duplicate key '{key}'.", nameof(text));
-                        if (!int.TryParse(value, out var cid))
-                            throw new ArgumentException($"Invalid value for '{key}'.", nameof(text));
-                        passport.CountryId = cid;
+                        passport.CountryId = value;
                         break;
 
                     default:
