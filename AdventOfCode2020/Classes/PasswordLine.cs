@@ -11,7 +11,7 @@ namespace AdventOfCode2020
     /// <remarks>Used with <see cref="Day02"/>.</remarks>
     public class PasswordLine
     {
-        private static readonly Regex regex = new Regex(@"(?<min>\d+)-(?<max>\d+) (?<c>[a-z]): (?<pw>[a-z]+)");
+        private static readonly Regex regex = new(@"(?<min>\d+)-(?<max>\d+) (?<c>[a-z]): (?<pw>[a-z]+)");
 
         /// <summary>
         /// The password policy used to set the password.
@@ -39,7 +39,7 @@ namespace AdventOfCode2020
         /// password file.
         /// </summary>
         /// <param name="line">The line from a password file.</param>
-        /// <returns>The parsed <see cref="PasswordLine"/></returns>
+        /// <returns>The parsed <see cref="PasswordLine"/>.</returns>
         public static PasswordLine Parse(string line)
         {
             if (line is null)
@@ -47,10 +47,10 @@ namespace AdventOfCode2020
 
             var match = regex.Match(line);
             if (match is null)
-                throw new ArgumentException(nameof(line));
+                throw new ArgumentException("Invalid line.", nameof(line));
 
-            var min = Int32.Parse(match.Groups["min"].Value);
-            var max = Int32.Parse(match.Groups["max"].Value);
+            var min = int.Parse(match.Groups["min"].Value);
+            var max = int.Parse(match.Groups["max"].Value);
             var c = match.Groups["c"].Value.Single();
             var password = match.Groups["pw"].Value;
 

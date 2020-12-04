@@ -23,13 +23,13 @@ namespace AdventOfCode2020
         /// map to a <see cref="TobogganMapTile"/>.
         /// </summary>
         /// <value></value>
-        public static readonly Dictionary<char, TobogganMapTile> Characters = new Dictionary<char, TobogganMapTile>
+        public static readonly Dictionary<char, TobogganMapTile> Characters = new()
         {
             ['.'] = TobogganMapTile.Empty,
             ['#'] = TobogganMapTile.Tree,
         };
 
-        private TobogganMapTile[,] map;
+        private readonly TobogganMapTile[,] map;
 
         /// <summary>
         /// Returns the <see cref="TobogganMapTile"/> located a cordinate
@@ -63,9 +63,9 @@ namespace AdventOfCode2020
         public TobogganMapTile[] GetPath(int dx, int dy)
         {
             if (dx < 0)
-                throw new ArgumentException(nameof(dx), $"{nameof(dx)} must be non-negative.");
+                throw new ArgumentException($"{nameof(dx)} must be non-negative.", nameof(dx));
             if (dy <= 0)
-                throw new ArgumentException(nameof(dx), $"{nameof(dx)} must be positive.");
+                throw new ArgumentException($"{nameof(dy)} must be positive.", nameof(dy));
 
             return Enumerable.Range(0, this.map.GetLength(1) / dy)
                 .Select(i => this[i * dx, i * dy])
@@ -86,16 +86,16 @@ namespace AdventOfCode2020
                 throw new ArgumentNullException(nameof(input));
 
             if (input is "")
-                throw new ArgumentException(nameof(input), "Input must not be empty.");
+                throw new ArgumentException("Input must not be empty.", nameof(input));
 
             var lines = input.Split('\n');
             var widths = lines.Select(x => x.Length);
             if (widths.Distinct().Count() != 1)
-                throw new ArgumentException(nameof(input), "All lines must be the same length.");
+                throw new ArgumentException("All lines must be the same length.", nameof(input));
             var width = widths.First();
 
             if (width == 0)
-                throw new ArgumentException(nameof(input), "Map width must be greater than 0.");
+                throw new ArgumentException("Map width must be greater than 0.", nameof(input));
 
             var trees = new TobogganMapTile[width, lines.Length];
             for (int y = 0; y < lines.Length; y++)
@@ -109,7 +109,7 @@ namespace AdventOfCode2020
                     }
                     else
                     {
-                        throw new ArgumentException(nameof(input), $"Unexpected character '{c}' at line {y} position {x}.");
+                        throw new ArgumentException($"Unexpected character '{c}' at line {y} position {x}.", nameof(input));
                     }
                 }
             }
