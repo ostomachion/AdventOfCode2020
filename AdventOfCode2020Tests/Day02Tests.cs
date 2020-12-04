@@ -17,7 +17,7 @@ namespace AdventOfCode2020Tests
             var results = list.Select(x => x.Policy.OldSystemCheck(x.Password));
 
             // Then
-            Assert.Equal(results, new[] { true, false, true });
+            Assert.Equal(new[] { true, false, true }, results);
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace AdventOfCode2020Tests
             var results = list.Select(x => x.Policy.NewSystemCheck(x.Password));
 
             // Then
-            Assert.Equal(results, new[] { true, false, false });
+            Assert.Equal(new[] { true, false, false }, results);
         }
     }
 }
