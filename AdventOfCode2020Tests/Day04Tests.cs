@@ -11,15 +11,17 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
+            var passports = Input.Get(4).Split("\n\n").Select(Passport.Parse);
 
             // When
+            var status = passports.Select(x => x.IsValid);
 
             // Then
-            Assert.True(false);
+            Assert.Equal(new[] { true, false, true, false }, status);
         }
 
         [Fact]
-        public void Part2Test(int dx, int dy, int expectedTrees)
+        public void Part2Test()
         {
             // Given
 
