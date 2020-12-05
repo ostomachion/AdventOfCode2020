@@ -22,7 +22,10 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            throw new NotImplementedException();
+            var passports = Input.Get(4).Split("\n\n").Select(PassportData.Parse);
+
+            // When
+            Console.WriteLine(passports.Count(x => x.IsValidPassport(out _)));
         }
     }
 }
