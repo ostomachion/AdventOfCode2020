@@ -11,7 +11,8 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            throw new NotImplementedException();
+            var seatIds = Input.GetLines(5).Select(x => new BoardingPass(x).SeatId);
+            Console.WriteLine(seatIds.Max());
         }
 
         /// <summary>
