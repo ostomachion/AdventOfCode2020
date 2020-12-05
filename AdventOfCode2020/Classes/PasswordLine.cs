@@ -47,7 +47,7 @@ namespace AdventOfCode2020
 
             var match = regex.Match(line);
             if (match is null)
-                throw new ArgumentException("Invalid line.", nameof(line));
+                throw new FormatException("Invalid line.");
 
             var min = int.Parse(match.Groups["min"].Value);
             var max = int.Parse(match.Groups["max"].Value);

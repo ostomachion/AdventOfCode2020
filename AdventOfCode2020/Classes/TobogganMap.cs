@@ -82,11 +82,11 @@ namespace AdventOfCode2020
             var lines = input.Split('\n');
             var widths = lines.Select(x => x.Length);
             if (widths.Distinct().Count() != 1)
-                throw new ArgumentException("All lines must be the same length.", nameof(input));
+                throw new FormatException("All lines must be the same length.");
             var width = widths.First();
 
             if (width == 0)
-                throw new ArgumentException("Map width must be greater than 0.", nameof(input));
+                throw new FormatException("Map width must be greater than 0.");
 
             var trees = new TobogganMapTile[width, lines.Length];
             for (int y = 0; y < lines.Length; y++)
@@ -100,7 +100,7 @@ namespace AdventOfCode2020
                     }
                     else
                     {
-                        throw new ArgumentException($"Unexpected character '{c}' at line {y} position {x}.", nameof(input));
+                        throw new FormatException($"Unexpected character '{c}' at line {y} position {x}.");
                     }
                 }
             }

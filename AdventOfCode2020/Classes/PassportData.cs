@@ -51,11 +51,11 @@ namespace AdventOfCode2020
             {
                 var parts = item.Split(':');
                 if (parts.Length != 2)
-                    throw new ArgumentException($"Invalid item format at '{item}'.");
+                    throw new FormatException($"Invalid item format at '{item}'.");
                 var key = parts[0];
                 var value = parts[1];
                 if (!data.items.TryAdd(key, value))
-                    throw new ArgumentException($"Duplicate key '{key}'.");
+                    throw new FormatException($"Duplicate key '{key}'.");
             }
 
             return data;

@@ -37,6 +37,11 @@ namespace AdventOfCode2020
         /// <param name="max">The maximum number.</param>
         public PasswordPolicy(char requiredCharacter, int min, int max)
         {
+            if (min < 0)
+                throw new ArgumentException("Minimum must be non-negative.", nameof(min));
+            if (max < 0)
+                throw new ArgumentException("Maximum must be non-negative.", nameof(max));
+
             RequiredCharacter = requiredCharacter;
             Min = min;
             Max = max;
