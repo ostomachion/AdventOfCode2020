@@ -13,7 +13,6 @@ namespace AdventOfCode2020
         {
             var passports = Input.Get(4).Split("\n\n").Select(PassportData.Parse);
 
-            // When
             Console.WriteLine(passports.Count(x => x.IsComplete));
         }
 
@@ -24,7 +23,6 @@ namespace AdventOfCode2020
         {
             var passports = Input.Get(4).Split("\n\n").Select(PassportData.Parse);
 
-            // When
             Console.WriteLine(passports.Count(x => x.IsValidPassport(out _)));
         }
     }
