@@ -1,81 +1,13 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace AdventOfCode2020
 {
-    public class PassportData
-    {
-        public static IEnumerable<string> RequiredKeys => new[] {
-            "byr",
-            "iyr",
-            "eyr",
-            "hgt",
-            "hcl",
-            "ecl",
-            "pid",
-            //"cid",
-        };
-
-        private readonly Dictionary<string, string> items = new();
-
-        public bool IsComplete => RequiredKeys.All(items.ContainsKey);
-
-        public static PassportData Parse(string text)
-        {
-            var data = new PassportData();
-
-            var items = text.Split(' ', '\n');
-
-            foreach (var item in items)
-            {
-                var parts = item.Split(':');
-                if (parts.Length != 2)
-                    throw new ArgumentException($"Invalid item format at '{item}'.");
-                var key = parts[0];
-                var value = parts[1];
-                if (!data.items.TryAdd(key, value))
-                    throw new ArgumentException($"Duplicate key '{key}'.");
-            }
-
-            return data;
-        }
-
-        public bool IsValidPassport(out Passport passport)
-        {
-            passport = default;
-            if (!IsComplete)
-                return false;
-
-            if (Passport.TryParseBirthYear(items["byr"], out int birthYear) &&
-                Passport.TryParseIssueYear(items["iyr"], out int issueYear) &&
-                Passport.TryParseExpirationYear(items["eyr"], out int expirationYear) &&
-                Passport.TryParseHeight(items["hgt"], out Height height) &&
-                Passport.TryParseHairColor(items["hcl"], out Color hairColor) &&
-                Passport.TryParseEyeColor(items["ecl"], out EyeColor eyeColor) &&
-                Passport.TryParsePassportId(items["pid"], out int passportId))
-            {
-                passport.BirthYear = birthYear;
-                passport.IssueYear = issueYear;
-                passport.ExpirationYear = expirationYear;
-                passport.Height = height;
-                passport.HairColor = hairColor;
-                passport.EyeColor = eyeColor;
-                passport.PassportId = passportId;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    }
-
-    public enum EyeColor { Amber, Blue, Brown, Gray, Green, Hazel, Other }
-
+    /// <summary>
+    /// Represents a valid passport.
+    /// </summary>
+    /// <remarks>Used with <see cref="Day04"/>.</remarks>
     public struct Passport
     {
         private static readonly Dictionary<string, EyeColor> EyeColors = new()
@@ -89,15 +21,61 @@ namespace AdventOfCode2020
             ["oth"] = EyeColor.Other,
         };
 
+        /// <summary>
+        /// The year that the passport holder was born. This can be between 1920
+        /// and 2002.
+        /// </summary>
         public int BirthYear { get; set; }
+
+        /// <summary>
+        /// The year that the passport was issued. This can be between 2010 an
+        /// 2020.
+        /// </summary>
         public int IssueYear { get; set; }
+
+        /// <summary>
+        /// The year that the passport will expire. this can be between 2020 and
+        /// 2030.
+        /// </summary>
         public int ExpirationYear { get; set; }
+
+        /// <summary>
+        /// The height of the passport holder. This can be between 150 and 193
+        /// centimeters or 59 and 76 inches.
+        /// </summary>
         public Height Height { get; set; }
+
+        /// <summary>
+        /// The hair color of the passport holder.
+        /// </summary>
         public Color HairColor { get; set; }
+
+        /// <summary>
+        /// They eye color of the passport holder.
+        /// </summary>
         public EyeColor EyeColor { get; set; }
+
+        /// <summary>
+        /// The ID of this passport. This is a 10-digit number, possibly with
+        /// leading zeroes.
+        /// </summary>
         public int PassportId { get; set; }
+
+        /// <summary>
+        /// The ID of the country that the passport was issued in. Note that
+        /// this value is being ignored.
+        /// </summary>
         public int CountryId { get; set; }
 
+        /// <summary>
+        /// Attempts to parse <paramref name="text"/> into a valid birth year.
+        /// </summary>
+        /// <param name="text">The text to parse.</param>
+        /// <param name="value">The birth year, if parsed.</param>
+        /// <returns>
+        /// <c>true</c> if <paramref name="text"/> contains a valid birth year;
+        /// otherwise, <c>false</c>.
+        /// </returns>
         public static bool TryParseBirthYear(string text, out int value)
         {
             value = default;
@@ -106,6 +84,15 @@ namespace AdventOfCode2020
                 value is >= 1920 and <= 2002;
         }
 
+        /// <summary>
+        /// Attempts to parse <paramref name="text"/> into a valid issue year.
+        /// </summary>
+        /// <param name="text">The text to parse.</param>
+        /// <param name="value">The issue year, if parsed.</param>
+        /// <returns>
+        /// <c>true</c> if <paramref name="text"/> contains a issue birth year;
+        /// otherwise, <c>false</c>.
+        /// </returns>
         public static bool TryParseIssueYear(string text, out int value)
         {
             value = default;
@@ -114,6 +101,17 @@ namespace AdventOfCode2020
                 value is >= 2010 and <= 2020;
         }
 
+
+        /// <summary>
+        /// Attempts to parse <paramref name="text"/> into a valid expiration
+        /// year.
+        /// </summary>
+        /// <param name="text">The text to parse.</param>
+        /// <param name="value">The expiration year, if parsed.</param>
+        /// <returns>
+        /// <c>true</c> if <paramref name="text"/> contains a valid expiration
+        /// year; otherwise, <c>false</c>.
+        /// </returns>
         public static bool TryParseExpirationYear(string text, out int value)
         {
             value = default;
@@ -122,6 +120,15 @@ namespace AdventOfCode2020
                 value is >= 2020 and <= 2030;
         }
 
+        /// <summary>
+        /// Attempts to parse <paramref name="text"/> into a valid height.
+        /// </summary>
+        /// <param name="text">The text to parse.</param>
+        /// <param name="value">The height, if parsed.</param>
+        /// <returns>
+        /// <c>true</c> if <paramref name="text"/> contains a valid height;
+        /// otherwise, <c>false</c>.
+        /// </returns>
         public static bool TryParseHeight(string text, out Height height)
         {
             return AdventOfCode2020.Height.TryParse(text, out height) &&
@@ -130,6 +137,15 @@ namespace AdventOfCode2020
             { Value: >= 59 and <= 76, Unit: HeightUnit.Inch };
         }
 
+        /// <summary>
+        /// Attempts to parse <paramref name="text"/> into a valid hair color.
+        /// </summary>
+        /// <param name="text">The text to parse.</param>
+        /// <param name="value">The hair color, if parsed.</param>
+        /// <returns>
+        /// <c>true</c> if <paramref name="text"/> contains a valid hair color;
+        /// otherwise, <c>false</c>.
+        /// </returns>
         public static bool TryParseHairColor(string text, out Color color)
         {
             if (Regex.IsMatch(text, @"^#[0-9a-f]{6}$"))
@@ -144,48 +160,33 @@ namespace AdventOfCode2020
             }
         }
 
+        /// <summary>
+        /// Attempts to parse <paramref name="text"/> into a valid eye color.
+        /// </summary>
+        /// <param name="text">The text to parse.</param>
+        /// <param name="value">The eye color, if parsed.</param>
+        /// <returns>
+        /// <c>true</c> if <paramref name="text"/> contains a valid eye color;
+        /// otherwise, <c>false</c>.
+        /// </returns>
         public static bool TryParseEyeColor(string text, out EyeColor color)
         {
             return EyeColors.TryGetValue(text, out color);
         }
 
+        /// <summary>
+        /// Attempts to parse <paramref name="text"/> into a valid passport ID.
+        /// </summary>
+        /// <param name="text">The text to parse.</param>
+        /// <param name="value">The passport ID, if parsed.</param>
+        /// <returns>
+        /// <c>true</c> if <paramref name="text"/> contains a valid passport ID;
+        /// otherwise, <c>false</c>.
+        /// </returns>
         public static bool TryParsePassportId(string text, out int id)
         {
             id = default;
             return Regex.IsMatch(text, @"^[0-9]{9}$") && int.TryParse(text, out id);
-        }
-    }
-
-    public enum HeightUnit { Centimeter, Inch }
-
-    public struct Height
-    {
-        private static readonly Regex regex = new($"^(?<value>[0-9]+)(?<unit>cm|in)$");
-
-        public int Value { get; init; }
-        public HeightUnit Unit { get; init; }
-
-        public static bool TryParse(string text, out Height height)
-        {
-            var match = regex.Match(text);
-            if (!match.Success)
-            {
-                height = default;
-                return false;
-            }
-
-            height = new Height
-            {
-                Value = int.Parse(match.Groups["value"].Value),
-                Unit = match.Groups["unit"].Value switch
-                {
-                    "cm" => HeightUnit.Centimeter,
-                    "in" => HeightUnit.Inch,
-                    _ => throw new NotImplementedException()
-                }
-            };
-
-            return true;
         }
     }
 }

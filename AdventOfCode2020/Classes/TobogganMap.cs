@@ -5,24 +5,15 @@ using System.Linq;
 namespace AdventOfCode2020
 {
     /// <summary>
-    /// Represents an individual tile on a <see cref="TobogganMap"/>.
-    /// </summary>
-    public enum TobogganMapTile
-    {
-        Empty,
-        Tree,
-    }
-
-    /// <summary>
     /// Represents a map of trees. The map repeats to the right forever.
     /// </summary>
+    /// <remarks>Used with <see cref="Day03"/>.</remarks>
     public class TobogganMap
     {
         /// <summary>
         /// A mapping from characters used in the text representation of the
         /// map to a <see cref="TobogganMapTile"/>.
         /// </summary>
-        /// <value></value>
         public static readonly Dictionary<char, TobogganMapTile> Characters = new()
         {
             ['.'] = TobogganMapTile.Empty,
