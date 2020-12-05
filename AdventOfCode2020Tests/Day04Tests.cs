@@ -11,10 +11,10 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
-            var passports = Input.Get(4).Split("\n\n").Select(Passport.Parse);
+            var passports = Input.Get(4).Split("\n\n").Select(PassportData.Parse);
 
             // When
-            var status = passports.Select(x => x.IsValid);
+            var status = passports.Select(x => x.IsComplete);
 
             // Then
             Assert.Equal(new[] { true, false, true, false }, status);

@@ -11,10 +11,10 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            var passports = Input.Get(4).Split("\n\n").Select(Passport.Parse);
+            var passports = Input.Get(4).Split("\n\n").Select(PassportData.Parse);
 
             // When
-            Console.WriteLine(passports.Count(x => x.IsValid));
+            Console.WriteLine(passports.Count(x => x.IsComplete));
         }
 
         /// <summary>
