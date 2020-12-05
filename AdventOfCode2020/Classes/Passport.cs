@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -42,118 +43,149 @@ namespace AdventOfCode2020
 
             return data;
         }
+
+        public bool IsValidPassport(out Passport passport)
+        {
+            passport = default;
+            if (!IsComplete)
+                return false;
+
+            if (Passport.TryParseBirthYear(items["byr"], out int birthYear) &&
+                Passport.TryParseIssueYear(items["iyr"], out int issueYear) &&
+                Passport.TryParseExpirationYear(items["eyr"], out int expirationYear) &&
+                Passport.TryParseHeight(items["hgt"], out Height height) &&
+                Passport.TryParseHairColor(items["hcl"], out Color hairColor) &&
+                Passport.TryParseEyeColor(items["ecl"], out EyeColor eyeColor) &&
+                Passport.TryParsePassportId(items["pid"], out int passportId))
+            {
+                passport.BirthYear = birthYear;
+                passport.IssueYear = issueYear;
+                passport.ExpirationYear = expirationYear;
+                passport.Height = height;
+                passport.HairColor = hairColor;
+                passport.EyeColor = eyeColor;
+                passport.PassportId = passportId;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
-    public class Passport
+    public enum EyeColor { Amber, Blue, Brown, Gray, Green, Hazel, Other }
+
+    public struct Passport
     {
-        // public static readonly Dictionary<string, EyeColor> EyeColors = new()
-        // {
-        //     ["amb"] = AdventOfCode2020.EyeColor.Amber,
-        //     ["brn"] = AdventOfCode2020.EyeColor.Brown,
-        //     ["hzl"] = AdventOfCode2020.EyeColor.Hazel,
-        // };
+        private static readonly Dictionary<string, EyeColor> EyeColors = new()
+        {
+            ["amb"] = EyeColor.Amber,
+            ["blu"] = EyeColor.Blue,
+            ["brn"] = EyeColor.Brown,
+            ["gry"] = EyeColor.Gray,
+            ["grn"] = EyeColor.Green,
+            ["hzl"] = EyeColor.Hazel,
+            ["oth"] = EyeColor.Other,
+        };
 
-        // public int BirthYear { get; private set; }
-        // public int IssueYear { get; private set; }
-        // public int ExpirationYear { get; private set; }
-        // public int Height { get; private set; }
-        // public Color HairColor { get; private set; }
-        // public EyeColor? EyeColor { get; private set; }
-        // public int? PassportId { get; private set; }
-        // public int? CountryId { get; private set; }
+        public int BirthYear { get; set; }
+        public int IssueYear { get; set; }
+        public int ExpirationYear { get; set; }
+        public Height Height { get; set; }
+        public Color HairColor { get; set; }
+        public EyeColor EyeColor { get; set; }
+        public int PassportId { get; set; }
+        public int CountryId { get; set; }
 
-        // public static Passport Parse(string text)
-        // {
-        //     var passport = new Passport();
+        public static bool TryParseBirthYear(string text, out int value)
+        {
+            value = default;
+            return Regex.IsMatch(text, @"^\d{4}$") &&
+                int.TryParse(text, out value) &&
+                value is >= 1920 and <= 2002;
+        }
 
-        //     var items = text.Split(' ', '\n');
-        //     foreach (var item in items)
-        //     {
-        //         var parts = item.Split(':');
-        //         if (parts.Length != 2)
-        //             throw new ArgumentException($"Invalid item format at '{item}'.");
-        //         var key = parts[0];
-        //         var value = parts[1];
+        public static bool TryParseIssueYear(string text, out int value)
+        {
+            value = default;
+            return Regex.IsMatch(text, @"^\d{4}$") &&
+                int.TryParse(text, out value) &&
+                value is >= 2010 and <= 2020;
+        }
 
-        //         switch (key)
-        //         {
-        //             case "byr":
-        //                 if (passport.BirthYear is not null)
-        //                     throw new ArgumentException($"Duplicate key '{key}'.", nameof(text));
-        //                 if (!int.TryParse(value, out var byr))
-        //                     throw new ArgumentException($"Invalid value for '{key}'.", nameof(text));
-        //                 passport.BirthYear = byr;
-        //                 break;
+        public static bool TryParseExpirationYear(string text, out int value)
+        {
+            value = default;
+            return Regex.IsMatch(text, @"^\d{4}$") &&
+                int.TryParse(text, out value) &&
+                value is >= 2020 and <= 2030;
+        }
 
-        //             case "iyr":
-        //                 if (passport.IssueYear is not null)
-        //                     throw new ArgumentException($"Duplicate key '{key}'.", nameof(text));
-        //                 if (!int.TryParse(value, out var iyr))
-        //                     throw new ArgumentException($"Invalid value for '{key}'.", nameof(text));
-        //                 passport.IssueYear = iyr;
-        //                 break;
+        public static bool TryParseHeight(string text, out Height height)
+        {
+            return AdventOfCode2020.Height.TryParse(text, out height) &&
+                height is
+            { Value: >= 150 and <= 193, Unit: HeightUnit.Centimeter } or
+            { Value: >= 59 and <= 76, Unit: HeightUnit.Inch };
+        }
 
-        //             case "eyr":
-        //                 if (passport.ExpirationYear is not null)
-        //                     throw new ArgumentException($"Duplicate key '{key}'.", nameof(text));
-        //                 if (!int.TryParse(value, out var eyr))
-        //                     throw new ArgumentException($"Invalid value for '{key}'.", nameof(text));
-        //                 passport.ExpirationYear = eyr;
-        //                 break;
+        public static bool TryParseHairColor(string text, out Color color)
+        {
+            if (Regex.IsMatch(text, @"^#[0-9a-f]{6}$"))
+            {
+                color = ColorTranslator.FromHtml(text);
+                return true;
+            }
+            else
+            {
+                color = default;
+                return false;
+            }
+        }
 
-        //             case "hgt":
-        //                 if (passport.Height is not null)
-        //                     throw new ArgumentException($"Duplicate key '{key}'.", nameof(text));
-        //                 if (!int.TryParse(value, out var hgt))
-        //                     throw new ArgumentException($"Invalid value for '{key}'.", nameof(text));
-        //                 passport.Height = hgt;
-        //                 break;
+        public static bool TryParseEyeColor(string text, out EyeColor color)
+        {
+            return EyeColors.TryGetValue(text, out color);
+        }
 
-        //             case "hcl":
-        //                 if (passport.HairColor is not null)
-        //                     throw new ArgumentException($"Duplicate key '{key}'.", nameof(text));
-        //                 Color hcl;
-        //                 try
-        //                 {
-        //                     hcl = ColorTranslator.FromHtml(value);
-        //                 }
-        //                 catch (ArgumentException e)
-        //                 {
-        //                     throw new ArgumentException($"Invalid value for '{key}'.", nameof(text), e);
-        //                 }
-        //                 passport.HairColor = hcl;
-        //                 break;
+        public static bool TryParsePassportId(string text, out int id)
+        {
+            id = default;
+            return Regex.IsMatch(text, @"^[0-9]{9}$") && int.TryParse(text, out id);
+        }
+    }
 
-        //             case "ecl":
-        //                 if (passport.EyeColor is not null)
-        //                     throw new ArgumentException($"Duplicate key '{key}'.", nameof(text));
-        //                 if (!EyeColors.TryGetValue(value, out var ecl))
-        //                     throw new ArgumentException($"Invalid value for '{key}'.", nameof(text));
-        //                 passport.EyeColor = ecl;
-        //                 break;
+    public enum HeightUnit { Centimeter, Inch }
 
-        //             case "pid":
-        //                 if (passport.PassportId is not null)
-        //                     throw new ArgumentException($"Duplicate key '{key}'.", nameof(text));
-        //                 if (!int.TryParse(value, out var pid))
-        //                     throw new ArgumentException($"Invalid value for '{key}'.", nameof(text));
-        //                 passport.PassportId = pid;
-        //                 break;
+    public struct Height
+    {
+        private static readonly Regex regex = new($"^(?<value>[0-9]+)(?<unit>cm|in)$");
 
-        //             case "cid":
-        //                 if (passport.CountryId is not null)
-        //                     throw new ArgumentException($"Duplicate key '{key}'.", nameof(text));
-        //                 if (!int.TryParse(value, out var cid))
-        //                     throw new ArgumentException($"Invalid value for '{key}'.", nameof(text));
-        //                 passport.CountryId = cid;
-        //                 break;
+        public int Value { get; init; }
+        public HeightUnit Unit { get; init; }
 
-        //             default:
-        //                 throw new ArgumentException($"Invalid item key '{key}'.", nameof(text));
-        //         }
-        //     }
+        public static bool TryParse(string text, out Height height)
+        {
+            var match = regex.Match(text);
+            if (!match.Success)
+            {
+                height = default;
+                return false;
+            }
 
-        //     return passport;
-        // }
+            height = new Height
+            {
+                Value = int.Parse(match.Groups["value"].Value),
+                Unit = match.Groups["unit"].Value switch
+                {
+                    "cm" => HeightUnit.Centimeter,
+                    "in" => HeightUnit.Inch,
+                    _ => throw new NotImplementedException()
+                }
+            };
+
+            return true;
+        }
     }
 }

@@ -12,13 +12,13 @@ namespace AdventOfCode2020
         /// </summary>
         /// <param name="day">The day to retrieve.</param>
         /// <returns>The contents of the input file for the given day.</returns>
-        public static string Get(int day) => File.ReadAllText(Path.Combine("Input", $"Day{day.ToString().PadLeft(2, '0')}.txt"));
+        public static string Get(int day, string? id = null) => File.ReadAllText(Path.Combine("Input", $"Day{day.ToString().PadLeft(2, '0')}{(id is null ? "" : "-" + id)}.txt"));
 
         /// <summary>
         /// Returns the lines of an input file for a given day.
         /// </summary>
         /// <param name="day">The day to retrieve.</param>
         /// <returns>The lines of the input file for the given day.</returns>
-        public static string[] GetLines(int day) => Get(day).Split('\n');
+        public static string[] GetLines(int day, string? id = null) => Get(day, id).Split('\n');
     }
 }
