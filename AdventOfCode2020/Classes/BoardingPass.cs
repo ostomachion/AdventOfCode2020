@@ -19,10 +19,5 @@ namespace AdventOfCode2020
             Row = Convert.ToInt32(specification.Substring(0, 7).Replace("F", "0").Replace("B", "1"), 2);
             Column = Convert.ToInt32(specification.Substring(7, 3).Replace("L", "0").Replace("R", "1"), 2);
         }
-
-        public BoardingPass(int row, int column)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
