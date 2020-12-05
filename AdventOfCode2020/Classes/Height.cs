@@ -33,6 +33,9 @@ namespace AdventOfCode2020
         /// </returns>
         public static bool TryParse(string text, out Height height)
         {
+            if (text is null)
+                throw new ArgumentNullException(nameof(text));
+
             var match = regex.Match(text);
             if (!match.Success)
             {

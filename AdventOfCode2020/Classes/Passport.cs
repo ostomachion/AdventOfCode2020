@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -78,6 +79,9 @@ namespace AdventOfCode2020
         /// </returns>
         public static bool TryParseBirthYear(string text, out int value)
         {
+            if (text is null)
+                throw new ArgumentNullException(nameof(text));
+
             value = default;
             return Regex.IsMatch(text, @"^\d{4}$") &&
                 int.TryParse(text, out value) &&
@@ -95,6 +99,9 @@ namespace AdventOfCode2020
         /// </returns>
         public static bool TryParseIssueYear(string text, out int value)
         {
+            if (text is null)
+                throw new ArgumentNullException(nameof(text));
+
             value = default;
             return Regex.IsMatch(text, @"^\d{4}$") &&
                 int.TryParse(text, out value) &&
@@ -114,6 +121,9 @@ namespace AdventOfCode2020
         /// </returns>
         public static bool TryParseExpirationYear(string text, out int value)
         {
+            if (text is null)
+                throw new ArgumentNullException(nameof(text));
+
             value = default;
             return Regex.IsMatch(text, @"^\d{4}$") &&
                 int.TryParse(text, out value) &&
@@ -131,6 +141,9 @@ namespace AdventOfCode2020
         /// </returns>
         public static bool TryParseHeight(string text, out Height height)
         {
+            if (text is null)
+                throw new ArgumentNullException(nameof(text));
+
             return AdventOfCode2020.Height.TryParse(text, out height) &&
                 height is
             { Value: >= 150 and <= 193, Unit: HeightUnit.Centimeter } or
@@ -148,6 +161,9 @@ namespace AdventOfCode2020
         /// </returns>
         public static bool TryParseHairColor(string text, out Color color)
         {
+            if (text is null)
+                throw new ArgumentNullException(nameof(text));
+
             if (Regex.IsMatch(text, @"^#[0-9a-f]{6}$"))
             {
                 color = ColorTranslator.FromHtml(text);
@@ -171,6 +187,9 @@ namespace AdventOfCode2020
         /// </returns>
         public static bool TryParseEyeColor(string text, out EyeColor color)
         {
+            if (text is null)
+                throw new ArgumentNullException(nameof(text));
+
             return EyeColors.TryGetValue(text, out color);
         }
 
@@ -185,6 +204,9 @@ namespace AdventOfCode2020
         /// </returns>
         public static bool TryParsePassportId(string text, out int id)
         {
+            if (text is null)
+                throw new ArgumentNullException(nameof(text));
+
             id = default;
             return Regex.IsMatch(text, @"^[0-9]{9}$") && int.TryParse(text, out id);
         }

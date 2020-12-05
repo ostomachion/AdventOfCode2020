@@ -40,6 +40,9 @@ namespace AdventOfCode2020
         /// <returns>The <see cref="PassportData"/> based on the string.</returns>
         public static PassportData Parse(string text)
         {
+            if (text is null)
+                throw new ArgumentNullException(nameof(text));
+
             var data = new PassportData();
 
             var items = text.Split(' ', '\n');
