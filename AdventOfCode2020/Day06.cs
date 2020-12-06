@@ -11,16 +11,12 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            int sum = 0;
-            var input = Input.GetGroups(6);
-            var qs = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-            foreach (var group in input)
-            {
-                var lines = group.Split("\n");
-                    sum += qs.Count(x => lines.All(y => y.Contains(x)));
-            }
+            var answers = Input.GetGroups(6).Select(x => new CustomsDeclarationFormGroupAnswers(x));
+            
+            var count = answers.Sum(a => CustomsDeclarationFormAnswers.Questions
+                .Count(x => a.Answers.Any(y => y.Answer(x))));
 
-            Console.WriteLine(sum);
+            Console.Write(count);
         }
 
         /// <summary>
