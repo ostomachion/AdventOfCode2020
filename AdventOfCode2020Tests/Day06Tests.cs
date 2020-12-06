@@ -33,5 +33,19 @@ namespace AdventOfCode2020Tests
             // Then
             Assert.Equal(new[] { 3, 3, 3, 1, 1 }, anyoneYes);
         }
+
+        [Fact]
+        public void Part2Test()
+        {
+            // Given
+            var answers = Input.GetGroups(6).Select(x => new CustomsDeclarationFormGroupAnswers(x));
+
+            // When
+            var anyoneYes = answers.Select(a => CustomsDeclarationFormAnswers.Questions
+                .Count(x => a.Answers.All(y => y.Answer(x))));
+
+            // Then
+            Assert.Equal(new[] { 3, 0, 1, 1, 1 }, anyoneYes);
+        }
     }
 }

@@ -24,8 +24,12 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            var input = Input.Get(6);
+            var answers = Input.GetGroups(6).Select(x => new CustomsDeclarationFormGroupAnswers(x));
+            
+            var count = answers.Sum(a => CustomsDeclarationFormAnswers.Questions
+                .Count(x => a.Answers.All(y => y.Answer(x))));
 
+            Console.Write(count);
         }
     }
 }
