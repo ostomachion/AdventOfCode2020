@@ -12,7 +12,7 @@ namespace AdventOfCode2020
         public static void Part1()
         {
             int sum = 0;
-            var input = Input.Get(6).Split("\n\n");
+            var input = Input.GetGroups(6);
             var qs = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
             foreach (var group in input)
             {

@@ -11,7 +11,7 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            var passports = Input.Get(4).Split("\n\n").Select(PassportData.Parse);
+            var passports = Input.GetGroups(4).Select(PassportData.Parse);
 
             Console.WriteLine(passports.Count(x => x.IsComplete));
         }
@@ -21,7 +21,7 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            var passports = Input.Get(4).Split("\n\n").Select(PassportData.Parse);
+            var passports = Input.GetGroups(4).Select(PassportData.Parse);
 
             Console.WriteLine(passports.Count(x => x.IsValidPassport(out _)));
         }

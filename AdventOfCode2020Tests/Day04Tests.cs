@@ -11,7 +11,7 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
-            var passports = Input.Get(4).Split("\n\n").Select(PassportData.Parse);
+            var passports = Input.GetGroups(4).Select(PassportData.Parse);
 
             // When
             var status = passports.Select(x => x.IsComplete);
@@ -66,7 +66,7 @@ namespace AdventOfCode2020Tests
         [Fact]
         public void Part2InvalidTest() {
             // Given
-            var data = Input.Get(4, "Invalid").Split("\n\n").Select(PassportData.Parse);
+            var data = Input.GetGroups(4, "Invalid").Select(PassportData.Parse);
 
             // Then
             Assert.All(data, item => Assert.False(item.IsValidPassport(out _)));
@@ -75,7 +75,7 @@ namespace AdventOfCode2020Tests
         [Fact]
         public void Part2ValidTest() {
             // Given
-            var data = Input.Get(4, "Valid").Split("\n\n").Select(PassportData.Parse);
+            var data = Input.GetGroups(4, "Valid").Select(PassportData.Parse);
 
             // Then
             Assert.All(data, item => Assert.True(item.IsValidPassport(out _)));

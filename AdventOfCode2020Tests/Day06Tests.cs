@@ -24,7 +24,7 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
-            var answers = Input.Get(6).Split("\n\n").Select(x => new CustomsDeclarationFormGroupAnswers(x));
+            var answers = Input.GetGroups(6).Select(x => new CustomsDeclarationFormGroupAnswers(x));
 
             // When
             var anyoneYes = answers.Select(a => CustomsDeclarationFormAnswers.Questions
