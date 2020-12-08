@@ -32,7 +32,7 @@ namespace AdventOfCode2020
 
         public int CountBags(string color)
         {
-            throw new NotImplementedException();
+            return this[color].Contents.Sum(x => x.Value * (1 + CountBags(x.Key)));
         }
     }
 
