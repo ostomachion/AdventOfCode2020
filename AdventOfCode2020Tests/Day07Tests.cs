@@ -32,7 +32,7 @@ namespace AdventOfCode2020Tests
             var count = rules.CountBags("shiny gold");
 
             // Then
-            Assert.Equal(126, count);
+            Assert.Equal(32, count);
         }
     }
 }
