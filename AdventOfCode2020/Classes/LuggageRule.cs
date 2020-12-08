@@ -17,11 +17,17 @@ namespace AdventOfCode2020
             Rules = rules;
         }
 
+        private readonly Dictionary<(string, string), bool> memo = new();
         public bool CanEventuallyContain(string outer, string inner)
         {
+            if (memo.TryGetValue((outer, inner), out bool value))
+                return value;
+
             var rule = this[outer];
-            return rule.Contents.ContainsKey(inner) ||
+            value = rule.Contents.ContainsKey(inner) ||
                 rule.Contents.Any(x => CanEventuallyContain(x.Key, inner));
+            memo.Add((outer, inner), value);
+            return value;
         }
     }
 

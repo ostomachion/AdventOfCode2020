@@ -11,7 +11,15 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            throw new NotImplementedException();
+            // Given
+            var rules = new LuggageRuleSet(Input.GetLines(7).Select(x => new LuggageRule(x)));
+
+            // When
+            var colors = rules.Rules.Select(x => x.Color);
+            var canHoldShinyGold = colors.Where(x => rules.CanEventuallyContain(x, "shiny gold"))
+                .OrderBy(x => x);
+
+            Console.WriteLine(canHoldShinyGold.Count());
         }
 
         /// <summary>
@@ -19,7 +27,7 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
