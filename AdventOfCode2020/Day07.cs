@@ -27,7 +27,9 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            
+            var rules = new LuggageRuleSet(Input.GetLines(7).Select(x => new LuggageRule(x)));
+
+            Console.WriteLine(rules.CountBags("shiny gold"));
         }
     }
 }
