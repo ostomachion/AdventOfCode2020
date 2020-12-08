@@ -21,5 +21,18 @@ namespace AdventOfCode2020Tests
             // Then
             Assert.Equal(new [] { "bright white", "dark orange", "light red", "muted yellow" }, canHoldShinyGold);
         }
+
+        [Fact]
+        public void Part2Test()
+        {
+            // Given
+            var rules = new LuggageRuleSet(Input.GetLines(7).Select(x => new LuggageRule(x)));
+
+            // When
+            var count = rules.CountBags("shiny gold");
+
+            // Then
+            Assert.Equal(126, count);
+        }
     }
 }

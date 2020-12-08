@@ -29,6 +29,11 @@ namespace AdventOfCode2020
             memo.Add((outer, inner), value);
             return value;
         }
+
+        public int CountBags(string color)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class LuggageRule
