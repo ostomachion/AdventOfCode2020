@@ -9,8 +9,6 @@ namespace AdventOfCode2020
         public int ProgramCounter { get; private set; }
         public int Accumulator { get; private set; }
 
-        public void Reset() => Accumulator = 0;
-
         public HandheldComputer(HandheldProgram program)
         {
             Program = program;
