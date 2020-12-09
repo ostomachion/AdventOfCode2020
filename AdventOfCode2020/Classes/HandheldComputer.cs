@@ -8,6 +8,7 @@ namespace AdventOfCode2020
         public HandheldProgram Program { get; }
         public int ProgramCounter { get; private set; }
         public int Accumulator { get; private set; }
+        public bool IsHalted { get; private set; }
 
         public HandheldComputer(HandheldProgram program)
         {
@@ -16,6 +17,12 @@ namespace AdventOfCode2020
 
         public void Step()
         {
+            if (ProgramCounter == Program.Instructions.Count())
+            {
+                IsHalted = true;
+                return;
+            }
+            
             if (ProgramCounter < 0 || ProgramCounter >= Program.Instructions.Count())
                 throw new InvalidOperationException("Out of bounds.");
 

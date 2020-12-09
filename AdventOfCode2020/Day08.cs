@@ -12,7 +12,7 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            var program = new HandheldProgram(Input.Get(8));
+            var program = HandheldProgram.Parse(Input.Get(8));
             var computer = new HandheldComputer(program);
             var accumulator = computer.Accumulator;
 
@@ -34,6 +34,22 @@ namespace AdventOfCode2020
         public static void Part2()
         {
             throw new NotImplementedException();
+        }
+
+        public static HandheldProgram? ModifyProgram(HandheldProgram program, int line)
+        {
+            var instruction = program.Instructions.ElementAt(line);
+            return instruction.Code switch
+            {
+                InstructionCode.Acc => null,
+                InstructionCode.Jmp => new HandheldProgram(program.Instructions.Take(line)
+                    .Concat(new[] { new Instruction(InstructionCode.Nop, instruction.Value) })
+                    .Concat(program.Instructions.Skip(line + 1))),
+                InstructionCode.Nop => new HandheldProgram(program.Instructions.Take(line)
+                    .Concat(new[] { new Instruction(InstructionCode.Jmp, instruction.Value) })
+                    .Concat(program.Instructions.Skip(line + 1))),
+                _ => throw new NotImplementedException(),
+            };
         }
     }
 }

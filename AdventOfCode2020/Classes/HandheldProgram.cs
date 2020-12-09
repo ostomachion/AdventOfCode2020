@@ -8,9 +8,14 @@ namespace AdventOfCode2020
     {
         public IEnumerable<Instruction> Instructions { get; }
 
-        public HandheldProgram(string source)
+        public HandheldProgram(IEnumerable<Instruction> instructions)
         {
-            Instructions = source.Split('\n').Select(x => new Instruction(x));
+            Instructions = instructions;
+        }
+
+        public static HandheldProgram Parse(string source)
+        {
+            return new(source.Split('\n').Select(x => Instruction.Parse(x)));
         }
     }
 }
