@@ -33,7 +33,33 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            throw new NotImplementedException();
+            // Given
+            var program = HandheldProgram.Parse(Input.Get(8));
+
+            for (var i = 0; i < program.Instructions.Count(); i++)
+            {
+                // When
+                var modified = ModifyProgram(program, i);
+                if (modified is null)
+                    continue;
+                var computer = new HandheldComputer(modified);
+                var accumulator = computer.Accumulator;
+
+                var visited = new HashSet<int>();
+
+                while (!computer.IsHalted && !visited.Contains(computer.ProgramCounter))
+                {
+                    accumulator = computer.Accumulator;
+                    visited.Add(computer.ProgramCounter);
+                    computer.Step();
+                }
+
+                if (computer.IsHalted)
+                {
+                    Console.WriteLine(computer.Accumulator);
+                    return;
+                }
+            }
         }
 
         public static HandheldProgram? ModifyProgram(HandheldProgram program, int line)
