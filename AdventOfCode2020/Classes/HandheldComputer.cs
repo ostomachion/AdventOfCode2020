@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace AdventOfCode2020
 {
@@ -17,7 +18,25 @@ namespace AdventOfCode2020
 
         public void Step()
         {
-            throw new NotImplementedException();
+            if (ProgramCounter < 0 || ProgramCounter >= Program.Instructions.Count())
+                throw new InvalidOperationException("Out of bounds.");
+
+            var instruction = Program.Instructions.ElementAt(ProgramCounter);
+            switch (instruction.Code)
+            {
+                case InstructionCode.Acc:
+                    Accumulator += instruction.Value;
+                    ProgramCounter++;
+                    break;
+                case InstructionCode.Jmp:
+                    ProgramCounter += instruction.Value;
+                    break;
+                case InstructionCode.Nop:
+                    ProgramCounter++;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
     }
 }

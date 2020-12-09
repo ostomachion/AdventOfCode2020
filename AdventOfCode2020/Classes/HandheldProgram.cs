@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode2020
 {
@@ -9,7 +10,7 @@ namespace AdventOfCode2020
 
         public HandheldProgram(string source)
         {
-            throw new NotImplementedException();
+            Instructions = source.Split('\n').Select(x => new Instruction(x));
         }
     }
 }

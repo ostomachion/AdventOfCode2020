@@ -14,17 +14,20 @@ namespace AdventOfCode2020Tests
             // Given
             var program = new HandheldProgram(Input.Get(8));
             var computer = new HandheldComputer(program);
-            var visited = new HashSet<int> { computer.ProgramCounter };
+            var accumulator = computer.Accumulator;
+
+            var visited = new HashSet<int>();
 
             // When
-            do
+            while (!visited.Contains(computer.ProgramCounter))
             {
-                computer.Step();
+                accumulator = computer.Accumulator;
                 visited.Add(computer.ProgramCounter);
-            } while (!visited.Contains(computer.ProgramCounter));
+                computer.Step();
+            }
 
             // Then
-            Assert.Equal(5, computer.Accumulator);
+            Assert.Equal(5, accumulator);
         }
     }
 }
