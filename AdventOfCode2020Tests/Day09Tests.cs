@@ -12,11 +12,13 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
+            var cypher = new XmasCypher(Input.GetLines(9).Select(int.Parse)) {PreambleSize = 5 };
 
             // When
+            var nonSumNumber = cypher.FindNonSumNumber();
 
             // Then
-            Assert.True(false);
+            Assert.Equal(127, nonSumNumber);
         }
 
         [Fact]
