@@ -12,7 +12,11 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            throw new NotImplementedException();
+            var cypher = new XmasCypher(Input.GetLines(9).Select(BigInteger.Parse));
+
+            var nonSumNumber = cypher.FindNonSumNumber();
+
+            Console.WriteLine(nonSumNumber);
         }
 
         /// <summary>

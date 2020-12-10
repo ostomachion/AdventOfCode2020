@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace AdventOfCode2020
 {
@@ -8,9 +9,9 @@ namespace AdventOfCode2020
     {
         public int PreambleSize { get; init; } = 25;
 
-        private int[] value;
+        private readonly BigInteger[] value;
 
-        public XmasCypher(IEnumerable<int> value)
+        public XmasCypher(IEnumerable<BigInteger> value)
         {
             this.value = value.ToArray();
         }
@@ -36,9 +37,30 @@ namespace AdventOfCode2020
             return false;
         }
 
-        public int FindNonSumNumber()
+        public BigInteger FindNonSumNumber()
         {
             return value[Enumerable.Range(0, value.Length).First(x => !IsValidPosition(x))];
+        }
+
+        public Span<BigInteger> FindKey(BigInteger sum)
+        {
+            for (var i = 0; i < value.Length; i++)
+            {
+                var test = value[i];
+                for (var j = i + 1; j < value.Length; j++)
+                {
+                    test += value[j];
+                    if (test == sum)
+                    {
+                        return value.AsSpan()[i..(j + 1)];
+                    }
+                    else if (test > sum)
+                    {
+                        break;
+                    }
+                }
+            }
+            throw new Exception("No key found.");
         }
     }
 }
