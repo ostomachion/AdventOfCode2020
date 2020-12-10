@@ -9,11 +9,13 @@ namespace AdventOfCode2020Tests
 {
     public class Day10Tests
     {
-        [Fact]
-        public void Part1Test()
+        [Theory]
+        [InlineData("Short", 7, 5)]
+        [InlineData("Long", 22, 10)]
+        public void Part1Test(string id, int diff1, int diff3)
         {
             // Given
-            var joltages = Input.GetLines(10, "Short")
+            var joltages = Input.GetLines(10, id)
                 .Select(int.Parse)
                 .OrderBy(x => x)
                 .Prepend(0)
@@ -25,8 +27,8 @@ namespace AdventOfCode2020Tests
                 .Select(i => joltages[i + 1] - joltages[i]);
 
             // Then
-            Assert.Equal(7, differences.Count(x => x == 1));
-            Assert.Equal(5, differences.Count(x => x == 3));
+            Assert.Equal(diff1, differences.Count(x => x == 1));
+            Assert.Equal(diff3, differences.Count(x => x == 3));
         }
     }
 }
