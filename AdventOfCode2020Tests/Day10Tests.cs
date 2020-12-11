@@ -30,5 +30,22 @@ namespace AdventOfCode2020Tests
             Assert.Equal(diff1, differences.Count(x => x == 1));
             Assert.Equal(diff3, differences.Count(x => x == 3));
         }
+
+        [Theory]
+        [InlineData("Short", 8)]
+        [InlineData("Long", 19208)]
+        public void Part2Test(string id, int combos)
+        {
+            // Given
+            var joltages = Input.GetLines(10, id)
+                .Select(int.Parse);
+            joltages = joltages.Append(0).Append(joltages.Max() + 3);
+            
+            // When
+            var counts = Day10.GetCounts(joltages);
+
+            // Then
+            Assert.Equal(combos, counts[0]);
+        }
     }
 }

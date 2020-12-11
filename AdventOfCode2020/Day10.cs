@@ -32,5 +32,10 @@ namespace AdventOfCode2020
         {
             throw new NotImplementedException();
         }
+
+        public static Dictionary<int, int> GetCounts(IEnumerable<int> joltages)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
