@@ -12,7 +12,17 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            throw new NotImplementedException();
+            var joltages = Input.GetLines(10)
+                .Select(int.Parse)
+                .OrderBy(x => x)
+                .Prepend(0)
+                .ToList();
+            joltages.Add(joltages.Max() + 3);
+
+            var differences = Enumerable.Range(0, joltages.Count - 1)
+                .Select(i => joltages[i + 1] - joltages[i]);
+
+            Console.WriteLine(differences.Count(x => x == 1) * differences.Count(x => x == 3));
         }
 
         /// <summary>
