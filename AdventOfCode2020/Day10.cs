@@ -35,7 +35,19 @@ namespace AdventOfCode2020
 
         public static Dictionary<int, int> GetCounts(IEnumerable<int> joltages)
         {
-            throw new NotImplementedException();
+            var ordered = joltages.OrderByDescending(x => x).ToList();
+            var value = new Dictionary<int, int> { [ordered[0]] = 1 };
+            for (int i = 1; i < ordered.Count; i++)
+            {
+                value.Add(ordered[i], 0);
+                for (var j = i - 1; j >= 0; j--)
+                {
+                    if (ordered[j] - ordered[i] > 3)
+                        break;
+                    value[ordered[i]] += value[ordered[j]];
+                }
+            }
+            return value;
         }
     }
 }
