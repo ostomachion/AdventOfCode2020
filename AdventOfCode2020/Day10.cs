@@ -30,13 +30,16 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            throw new NotImplementedException();
+            var joltages = Input.GetLines(10).Select(int.Parse);
+            joltages = joltages.Append(0).Append(joltages.Max() + 3);
+            
+            Console.WriteLine(GetCounts(joltages)[0]);
         }
 
-        public static Dictionary<int, int> GetCounts(IEnumerable<int> joltages)
+        public static Dictionary<int, BigInteger> GetCounts(IEnumerable<int> joltages)
         {
             var ordered = joltages.OrderByDescending(x => x).ToList();
-            var value = new Dictionary<int, int> { [ordered[0]] = 1 };
+            var value = new Dictionary<int, BigInteger> { [ordered[0]] = 1 };
             for (int i = 1; i < ordered.Count; i++)
             {
                 value.Add(ordered[i], 0);

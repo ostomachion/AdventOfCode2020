@@ -37,8 +37,7 @@ namespace AdventOfCode2020Tests
         public void Part2Test(string id, int combos)
         {
             // Given
-            var joltages = Input.GetLines(10, id)
-                .Select(int.Parse);
+            var joltages = Input.GetLines(10, id).Select(int.Parse);
             joltages = joltages.Append(0).Append(joltages.Max() + 3);
             
             // When
