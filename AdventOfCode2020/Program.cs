@@ -1,5 +1,5 @@
 ﻿using System;
 using AdventOfCode2020;
 
-Console.WriteLine("Day 10 Part 2");
-Day10.Part2();
+Console.WriteLine("Day 11 Part 1");
+Day11.Part1();

@@ -12,7 +12,11 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            throw new NotImplementedException();
+            var layout = SeatLayout.Parse(Input.Get(11));
+            var stable = layout.Stabalize();
+            var count = stable.Count(SeatLayoutTile.OccupiedSeat);
+            
+            Console.WriteLine(count);
         }
 
         /// <summary>
