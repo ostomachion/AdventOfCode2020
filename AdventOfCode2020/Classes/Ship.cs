@@ -7,17 +7,58 @@ namespace AdventOfCode2020
         public int Orientation { get; private set; }
         public int X { get; private set; }
         public int Y { get; private set; }
-        public int WaypointX { get; private set; }
-        public int WaypointY { get; private set; }
+        public int WaypointX { get; private set; } = 10;
+        public int WaypointY { get; private set; } = 1;
 
         public void FollowRoute(Route route)
         {
-            throw new NotImplementedException();
+            foreach (var instruction in route.Instructions)
+            {
+                Move(instruction);
+            }
         }
 
-        public void Move(RouteInstruction instruciton)
+        public void Move(RouteInstruction instruction)
         {
-            throw new NotImplementedException();
+            switch (instruction.Action)
+            {
+                case RouteAction.North:
+                    WaypointY += instruction.Value;
+                    break;
+                case RouteAction.South:
+                    WaypointY -= instruction.Value;
+                    break;
+                case RouteAction.East:
+                    WaypointX += instruction.Value;
+                    break;
+                case RouteAction.West:
+                    WaypointX -= instruction.Value;
+                    break;
+                case RouteAction.Left:
+                    (WaypointX, WaypointY) = instruction.Value switch
+                    {
+                        90 => (-WaypointY, WaypointX),
+                        180 => (-WaypointX, -WaypointY),
+                        270 => (WaypointY, -WaypointX),
+                        _ => throw new InvalidOperationException()
+                    };
+                    break;
+                case RouteAction.Right:
+                    (WaypointX, WaypointY) = instruction.Value switch
+                    {
+                        90 => (WaypointY, -WaypointX),
+                        180 => (-WaypointX, -WaypointY),
+                        270 => (-WaypointY, WaypointX),
+                        _ => throw new InvalidOperationException()
+                    };
+                    break;
+                case RouteAction.Forward:
+                    X += instruction.Value * WaypointX;
+                    Y += instruction.Value * WaypointY;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         public void FollowRouteAbsolute(Route route)

@@ -15,7 +15,7 @@ namespace AdventOfCode2020
             var route = Route.Parse(Input.Get(12));
             var ship = new Ship();
 
-            ship.FollowRoute(route);
+            ship.FollowRouteAbsolute(route);
 
             Console.WriteLine(Math.Abs(ship.X) + Math.Abs(ship.Y));
         }
