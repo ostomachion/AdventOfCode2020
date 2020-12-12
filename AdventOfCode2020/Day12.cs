@@ -25,7 +25,12 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            throw new NotImplementedException();
+            var route = Route.Parse(Input.Get(12));
+            var ship = new Ship();
+
+            ship.FollowRoute(route);
+
+            Console.WriteLine(Math.Abs(ship.X) + Math.Abs(ship.Y));
         }
     }
 }
