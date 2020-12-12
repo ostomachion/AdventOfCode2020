@@ -51,7 +51,7 @@ namespace AdventOfCode2020
             return new SeatLayout(value);
         }
 
-        public SeatLayout Step()
+        public SeatLayout StepPart1()
         {
             var value = new SeatLayoutTile[Width, Height];
 
@@ -60,7 +60,7 @@ namespace AdventOfCode2020
                 for (var i = 0; i < Width; i++)
                 {
                     value[i, j] = this[i, j] == SeatLayoutTile.Floor ? this[i, j] :
-                    CountAdjacent(i, j) switch
+                    CountAdjacentPart1(i, j) switch
                     {
                         0 => SeatLayoutTile.OccupiedSeat,
                         >= 4 => SeatLayoutTile.EmptySeat,
@@ -72,15 +72,42 @@ namespace AdventOfCode2020
             return new SeatLayout(value);
         }
 
-        public SeatLayout Stabalize()
+        public SeatLayout StepPart2()
         {
-            var next = Step();
-            return this == next ? this : next.Stabalize();
+            var value = new SeatLayoutTile[Width, Height];
+
+            for (var j = 0; j < Height; j++)
+            {
+                for (var i = 0; i < Width; i++)
+                {
+                    value[i, j] = this[i, j] == SeatLayoutTile.Floor ? this[i, j] :
+                    CountAdjacentPart2(i, j) switch
+                    {
+                        0 => SeatLayoutTile.OccupiedSeat,
+                        >= 5 => SeatLayoutTile.EmptySeat,
+                        _ => this[i, j]
+                    };
+                }
+            }
+
+            return new SeatLayout(value);
+        }
+
+        public SeatLayout StabalizePart1()
+        {
+            var next = StepPart1();
+            return this == next ? this : next.StabalizePart1();
+        }
+
+        public SeatLayout StabalizePart2()
+        {
+            var next = StepPart2();
+            return this == next ? this : next.StabalizePart2();
         }
 
         public int Count(SeatLayoutTile type) => value.Cast<SeatLayoutTile>().Count(x => x == type);
 
-        private int CountAdjacent(int x, int y)
+        private int CountAdjacentPart1(int x, int y)
         {
             return new[] {
                 this[x - 1, y - 1],
@@ -92,6 +119,11 @@ namespace AdventOfCode2020
                 this[x, y + 1],
                 this[x + 1, y + 1],
             }.Count(t => t == SeatLayoutTile.OccupiedSeat);
+        }
+
+        private int CountAdjacentPart2(int x, int y)
+        {
+            throw new NotImplementedException();
         }
 
         public override bool Equals(object? obj)

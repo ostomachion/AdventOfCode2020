@@ -27,12 +27,12 @@ namespace AdventOfCode2020Tests
             var layout = SeatLayout.Parse(Input.Get(11));
 
             // When
-            var step1 = layout.Step();
-            var step2 = step1.Step();
-            var step3 = step2.Step();
-            var step4 = step3.Step();
-            var step5 = step4.Step();
-            var stable = layout.Stabalize();
+            var step1 = layout.StepPart1();
+            var step2 = step1.StepPart1();
+            var step3 = step2.StepPart1();
+            var step4 = step3.StepPart1();
+            var step5 = step4.StepPart1();
+            var stable = layout.StabalizePart1();
             var count = stable.Count(SeatLayoutTile.OccupiedSeat);
 
             // Then
@@ -41,9 +41,23 @@ namespace AdventOfCode2020Tests
             Assert.Equal(step3, SeatLayout.Parse(Input.Get(11, "Step3")));
             Assert.Equal(step4, SeatLayout.Parse(Input.Get(11, "Step4")));
             Assert.Equal(step5, SeatLayout.Parse(Input.Get(11, "Step5")));
-            Assert.Equal(step5, step5.Step());
+            Assert.Equal(step5, step5.StepPart1());
             Assert.Equal(step5, stable);
             Assert.Equal(37, count);
+        }
+
+        [Fact]
+        public void Part2Test()
+        {
+            // Given
+            var layout = SeatLayout.Parse(Input.Get(11));
+
+            // When
+            var stable = layout.StabalizePart2();
+            var count = stable.Count(SeatLayoutTile.OccupiedSeat);
+
+            // Then
+            Assert.Equal(26, count);
         }
     }
 }
