@@ -1,13 +1,25 @@
 using System;
+using System.Collections.Generic;
 
 namespace AdventOfCode2020
 {
     public struct RouteInstruction
     {
-        public char Action { get; init; }
+        public RouteAction Action { get; init; }
         public int Value { get; init; }
 
-        public RouteInstruction(char action, int value)
+        private static readonly Dictionary<char, RouteAction> actions = new()
+        {
+            ['N'] = RouteAction.North,
+            ['S'] = RouteAction.South,
+            ['E'] = RouteAction.East,
+            ['W'] = RouteAction.West,
+            ['L'] = RouteAction.Left,
+            ['R'] = RouteAction.Right,
+            ['F'] = RouteAction.Forward
+        };
+
+        public RouteInstruction(RouteAction action, int value)
         {
             Action = action;
             Value = value;
@@ -15,7 +27,7 @@ namespace AdventOfCode2020
 
         public static RouteInstruction Parse(string text)
         {
-            throw new NotImplementedException();
+            return new RouteInstruction(actions[text[0]], int.Parse(text[1..]));
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode2020
 {
@@ -14,7 +15,7 @@ namespace AdventOfCode2020
 
         public static Route Parse(string text)
         {
-            throw new NotImplementedException();
+            return new Route(text.Split("\n").Select(RouteInstruction.Parse));
         }
     }
 }
