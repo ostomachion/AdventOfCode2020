@@ -72,7 +72,5 @@ namespace AdventOfCode2020
 
             Contents = new(contents);
         }
-
-        public bool CanEventuallyContain(string color) => throw new NotImplementedException();
     }
 }
