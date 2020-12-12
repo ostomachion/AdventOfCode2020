@@ -7,16 +7,28 @@ namespace AdventOfCode2020
         public int Orientation { get; private set; }
         public int X { get; private set; }
         public int Y { get; private set; }
+        public int WaypointX { get; private set; }
+        public int WaypointY { get; private set; }
 
         public void FollowRoute(Route route)
         {
+            throw new NotImplementedException();
+        }
+
+        public void Move(RouteInstruction instruciton)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FollowRouteAbsolute(Route route)
+        {
             foreach (var instruction in route.Instructions)
             {
-                Move(instruction);
+                MoveAbsolute(instruction);
             }
         }
 
-        public void Move(RouteInstruction instruction)
+        public void MoveAbsolute(RouteInstruction instruction)
         {
             switch (instruction.Action)
             {
@@ -47,7 +59,7 @@ namespace AdventOfCode2020
                         270 => RouteAction.South,
                         _ => throw new InvalidOperationException()
                     };
-                    Move(new RouteInstruction(action, instruction.Value));
+                    MoveAbsolute(new RouteInstruction(action, instruction.Value));
                     break;
                 default:
                     throw new NotImplementedException();
