@@ -16,15 +16,9 @@ namespace AdventOfCode2020
             this.value = value;
         }
 
-        public SeatLayoutTile this[int x, int y]
-        {
-            get
-            {
-                if (x < 0 || x >= Width || y < 0 || y >= Height)
-                    return SeatLayoutTile.Floor;
-                return value[x, y];
-            }
-        }
+        public SeatLayoutTile this[int x, int y] => InGrid(x, y) ? value[x, y] : SeatLayoutTile.Floor;
+
+        public bool InGrid(int x, int y) => !(x < 0 || x >= Width || y < 0 || y >= Height);
 
         private static readonly Dictionary<char, SeatLayoutTile> tiles = new()
         {
@@ -107,7 +101,7 @@ namespace AdventOfCode2020
 
         public int Count(SeatLayoutTile type) => value.Cast<SeatLayoutTile>().Count(x => x == type);
 
-        private int CountAdjacentPart1(int x, int y)
+        public int CountAdjacentPart1(int x, int y)
         {
             return new[] {
                 this[x - 1, y - 1],
@@ -121,9 +115,28 @@ namespace AdventOfCode2020
             }.Count(t => t == SeatLayoutTile.OccupiedSeat);
         }
 
-        private int CountAdjacentPart2(int x, int y)
+        public int CountAdjacentPart2(int x, int y)
         {
-            throw new NotImplementedException();
+            int value = 0;
+            for (var dy = -1; dy <= 1; dy++)
+            {
+                for (var dx = -1; dx <= 1; dx++)
+                {
+                    if (dy == 0 && dx == 0)
+                        continue;
+
+                    var testX = x;
+                    var testY = y;
+                    do
+                    {
+                        testX += dx;
+                        testY += dy;
+                    } while (InGrid(testX, testY) && this[testX, testY] == SeatLayoutTile.Floor);
+                    if (this[testX, testY] == SeatLayoutTile.OccupiedSeat)
+                        value++;
+                }
+            }
+            return value;
         }
 
         public override bool Equals(object? obj)

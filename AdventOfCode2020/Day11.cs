@@ -13,7 +13,7 @@ namespace AdventOfCode2020
         public static void Part1()
         {
             var layout = SeatLayout.Parse(Input.Get(11));
-            var stable = layout.Stabalize();
+            var stable = layout.StabalizePart1();
             var count = stable.Count(SeatLayoutTile.OccupiedSeat);
             
             Console.WriteLine(count);
@@ -24,7 +24,11 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            throw new NotImplementedException();
+            var layout = SeatLayout.Parse(Input.Get(11));
+            var stable = layout.StabalizePart2();
+            var count = stable.Count(SeatLayoutTile.OccupiedSeat);
+            
+            Console.WriteLine(count);
         }
     }
 }
