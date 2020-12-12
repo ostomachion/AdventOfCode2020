@@ -13,11 +13,15 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
+            var route = Route.Parse(Input.Get(12));
+            var ship = new Ship();
 
             // When
+            ship.FollowRoute(route);
 
             // Then
-            Assert.True(false);
+            Assert.Equal(17, ship.X);
+            Assert.Equal(-8, ship.Y);
         }
     }
 }
