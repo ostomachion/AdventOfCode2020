@@ -2,7 +2,7 @@
 using AdventOfCode2020;
 
 Console.WriteLine("Day 13 Part 1");
-Day12.Part2();
+Day13.Part1();
 
 Console.WriteLine();
 
