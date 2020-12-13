@@ -12,12 +12,31 @@ namespace AdventOfCode2020Tests
         [Fact]
         public void Part1Test()
         {
-            // Given
             
+            // Given
+            var notes = BusNotes.Parse(Input.Get(13));
+            
+
             // When
+            var earliest = notes.GetNextBus();
+            var waitTime = notes.GetWaitTime(earliest);
+
+            //Then
+            Assert.Equal(59, earliest);
+            Assert.Equal(5, waitTime);
+        }
+
+        [Fact]
+        public void Part2Test()
+        {
+            // Given
+            var notes = BusNotes.Parse(Input.Get(13));
+
+            // When
+            var t = Day13.Contest(notes.BusIds.ToArray());
 
             // Then
-            Assert.True(false);
+            Assert.Equal(1068781, t);
         }
     }
 }
