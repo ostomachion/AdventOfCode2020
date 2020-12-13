@@ -24,9 +24,9 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            var object = Day13Object.Parse(Input.Get(13));
+            var obj = Day13Object.Parse(Input.Get(13));
             
-            var result = object.Work();
+            var result = obj.Work();
 
             Console.WriteLine(result);
         }
