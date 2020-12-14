@@ -13,15 +13,11 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            // Given
-            var obj = Day14Obj.Parse(Input.GetLines(14));
-            
+            var computer = new SeaPortComputer();
+            var program = SeaPortProgram.Parse(Input.Get(14));
+            computer.Run(program, false);
 
-            // When
-            obj.Run();
-
-            //Then
-            System.Console.WriteLine(obj.Sum());
+            Console.WriteLine(Sum(computer));
         }
 
         /// <summary>
@@ -29,9 +25,17 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            // var obj = Day14Obj.Parse(Input.Get(14));
-            // var value = obj.Run();
-            // Console.WriteLine(value);
+            var computer = new SeaPortComputer();
+            var program = SeaPortProgram.Parse(Input.Get(14));
+
+            computer.Run(program, true);
+
+            Console.WriteLine(Sum(computer));
+        }
+
+        public static BigInteger Sum(SeaPortComputer computer)
+        {
+            return computer.Memory.Aggregate(BigInteger.Zero, (x, y) => x + y.Value);
         }
     }
 }
