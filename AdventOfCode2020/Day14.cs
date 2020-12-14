@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace AdventOfCode2020
 {
@@ -12,9 +13,15 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            var obj = Day14Obj.Parse(Input.Get(14));
-            var value = obj.Run();
-            Console.WriteLine(value);
+            // Given
+            var obj = Day14Obj.Parse(Input.GetLines(14));
+            
+
+            // When
+            obj.Run();
+
+            //Then
+            System.Console.WriteLine(obj.Sum());
         }
 
         /// <summary>
@@ -22,9 +29,9 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            var obj = Day14Obj.Parse(Input.Get(14));
-            var value = obj.Run();
-            Console.WriteLine(value);
+            // var obj = Day14Obj.Parse(Input.Get(14));
+            // var value = obj.Run();
+            // Console.WriteLine(value);
         }
     }
 }
