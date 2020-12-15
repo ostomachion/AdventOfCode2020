@@ -13,7 +13,11 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            throw new NotImplementedException();
+            var start = Input.Get(15).Split(',').Select(int.Parse);
+            var game = new MemoryGame(start);
+            var n = game.Play().ElementAt(2020 - 1);
+
+            Console.WriteLine(n);
         }
 
         /// <summary>
@@ -21,7 +25,11 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            throw new NotImplementedException();
+            var start = Input.Get(15).Split(',').Select(int.Parse);
+            var game = new MemoryGame(start);
+            var n = game.Play().ElementAt(30000000 - 1);
+
+            Console.WriteLine(n);
         }
     }
 }

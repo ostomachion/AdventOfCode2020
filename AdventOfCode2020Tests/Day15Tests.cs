@@ -13,7 +13,7 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
-            var start = new [] { 0, 3, 6};
+            var start = new[] { 0, 3, 6 };
             var game = new MemoryGame(start);
 
             // When
@@ -21,7 +21,7 @@ namespace AdventOfCode2020Tests
 
             // Then
             Assert.Equal(
-                new [] { 0, 3, 6, 0, 3, 3, 1, 0, 4, 0 },
+                new[] { 0, 3, 6, 0, 3, 3, 1, 0, 4, 0 },
                 play
             );
         }
