@@ -10,7 +10,7 @@ namespace AdventOfCode2020
     public class MemoryGame
     {
         private int turn = 0;
-        private Dictionary<int, int> olderSpoken = new();
+        private readonly Dictionary<int, int> olderSpoken = new();
         private int lastSpoken;
         public IEnumerable<int> StartingNumbers { get; }
 
