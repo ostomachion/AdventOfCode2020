@@ -14,7 +14,7 @@ namespace AdventOfCode2020
         /// </summary>
         public static readonly IEnumerable<char> Questions = "abcdefghijklmnopqrstuvwxyz";
 
-        private readonly HashSet<char> yesAnswers = new HashSet<char>();
+        private readonly HashSet<char> yesAnswers = new();
 
         /// <summary>
         /// Creates an instance of <see cref="CustomsDeclarationFormAnswers"/>
