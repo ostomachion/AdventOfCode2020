@@ -13,11 +13,28 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
+            var grid = ConwayCubeGrid.FromSlice(Input.Get(17));
 
             // When
+            for (var i = 0; i < 6; i++)
+                grid.Step();
 
             // Then
-            Assert.True(false);
+            Assert.Equal(112, grid.ActiveCells.Count);
+        }
+
+        [Fact]
+        public void Part2Test()
+        {
+            // Given
+            var grid = ConwayCubeGrid4D.FromSlice(Input.Get(17));
+
+            // When
+            for (var i = 0; i < 6; i++)
+                grid.Step();
+
+            // Then
+            Assert.Equal(848, grid.ActiveCells.Count);
         }
     }
 }

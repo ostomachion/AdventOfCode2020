@@ -13,7 +13,12 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            
+            var grid = ConwayCubeGrid.FromSlice(Input.Get(17));
+
+            for (var i = 0; i < 6; i++)
+                grid.Step();
+
+            Console.WriteLine(grid.ActiveCells.Count);
         }
 
         /// <summary>
@@ -21,7 +26,12 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part2()
         {
-            
+            var grid = ConwayCubeGrid4D.FromSlice(Input.Get(17));
+
+            for (var i = 0; i < 6; i++)
+                grid.Step();
+
+            Console.WriteLine(grid.ActiveCells.Count);
         }
     }
 }
