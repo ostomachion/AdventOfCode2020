@@ -13,13 +13,26 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
-            var expressions = Input.GetLines(18).Select(x => new NewMathExpression(x));
+            var expressions = Input.GetLines(18);
 
             // When
-            var answers = expressions.Select(x => x.Evaluate());
+            var answers = expressions.Select(NewMathExpression.Evaluate);
 
             // Then
-            Assert.Equal(new [] { 71, 51, 26, 437, 12240, 13632 }, answers);
+            Assert.Equal(new BigInteger[] { 71, 51, 26, 437, 12240, 13632 }, answers);
+        }
+
+        [Fact]
+        public void Part2Test()
+        {
+            // Given
+            var expressions = Input.GetLines(18);
+
+            // When
+            var answers = expressions.Select(NewMathExpression.EvaluateAdvanced);
+
+            // Then
+            Assert.Equal(new BigInteger[] { 231, 51, 46, 1445, 669060, 23340 }, answers);
         }
     }
 }
