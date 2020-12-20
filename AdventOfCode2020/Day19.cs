@@ -9,7 +9,7 @@ namespace AdventOfCode2020
     public static class Day19
     {
         /// <summary>
-        /// https://adventofcode.com/2020/day/189
+        /// https://adventofcode.com/2020/day/19
         /// </summary>
         public static void Part1()
         {
