@@ -14,10 +14,12 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
-            var tiles = Input.GetGroups(20).Select(ImageTile.Parse);
+            var tiles = Input.GetGroups(20).Select(ImageTile.Parse).ToList();
 
             // When
             var image = ImageTile.Arrange(tiles);
+            Assert.NotNull(image);
+
             var width = image.GetLength(0);
             var height = image.GetLength(1);
             var topLeft = image[0, 0];
