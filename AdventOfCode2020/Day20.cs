@@ -13,10 +13,8 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            // Given
             var tiles = Input.GetGroups(20).Select(ImageTile.Parse).ToList();
 
-            // When
             var image = ImageTile.Arrange(tiles)!;
 
             var width = image.GetLength(0);
@@ -26,7 +24,6 @@ namespace AdventOfCode2020
             var bottomLeft = image[0, height - 1];
             var bottomRight = image[width - 1, height - 1];
 
-            // Then
             Console.WriteLine((long)topLeft.Id * topRight.Id * bottomLeft.Id * bottomRight.Id);
         }
 
