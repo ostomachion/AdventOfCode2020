@@ -14,11 +14,17 @@ namespace AdventOfCode2020Tests
         public void Part1Test()
         {
             // Given
+            var notes = IngredientsListSet.Parse(Input.Get(21));
 
             // When
+            var allergens = notes.FindAllergens();
 
             // Then
-            Assert.True(false);
+            Assert.Equal(4, allergens.Count);
+            Assert.Contains("kfcds", allergens.Keys);
+            Assert.Contains("nhms", allergens.Keys);
+            Assert.Contains("sbzzf", allergens.Keys);
+            Assert.Contains("trh", allergens.Keys);
         }
     }
 }
