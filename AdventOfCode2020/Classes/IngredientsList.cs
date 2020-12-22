@@ -16,7 +16,7 @@ namespace AdventOfCode2020
         public static IngredientsList Parse(string text)
         {
             var parts = text.Split(" (contains ", 2);
-            return new IngredientsList(parts[0].Split(' '), parts[1].TrimEnd(')').Split(' '));
+            return new IngredientsList(parts[0].Split(' '), parts[1].TrimEnd(')').Split(", "));
         }
     }
 }

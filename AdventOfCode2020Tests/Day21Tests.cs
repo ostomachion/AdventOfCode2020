@@ -15,16 +15,34 @@ namespace AdventOfCode2020Tests
         {
             // Given
             var notes = IngredientsListSet.Parse(Input.Get(21));
+            var names = notes.Value.SelectMany(x => x.Ingredients);
+
+            // When
+            var allergens = notes.FindAllergens().Values;
+            var nonAllergens = names.Except(allergens).ToList();
+
+            // Then
+            Assert.Equal(4, nonAllergens.Count);
+            Assert.Contains("kfcds", nonAllergens);
+            Assert.Contains("nhms", nonAllergens);
+            Assert.Contains("sbzzf", nonAllergens);
+            Assert.Contains("trh", nonAllergens);
+        }
+
+        [Fact]
+        public void Part2Test()
+        {
+            // Given
+            var notes = IngredientsListSet.Parse(Input.Get(21));
 
             // When
             var allergens = notes.FindAllergens();
 
             // Then
-            Assert.Equal(4, allergens.Count);
-            Assert.Contains("kfcds", allergens.Keys);
-            Assert.Contains("nhms", allergens.Keys);
-            Assert.Contains("sbzzf", allergens.Keys);
-            Assert.Contains("trh", allergens.Keys);
+            Assert.Equal(3, allergens.Count);
+            Assert.Contains("mxmxvkd", allergens["dairy"]);
+            Assert.Contains("sqjhc", allergens["fish"]);
+            Assert.Contains("fvjkl", allergens["soy"]);
         }
     }
 }
