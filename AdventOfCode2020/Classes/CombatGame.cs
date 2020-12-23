@@ -48,7 +48,6 @@ namespace AdventOfCode2020
         public void PlayRecursive()
         {
             HashSet<string> previous = new();
-            // TODO: Avoid infinite games.
             while (Player1Deck.Any() && Player2Deck.Any())
             {
                 var state = GetState();
