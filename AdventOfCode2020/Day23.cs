@@ -13,7 +13,13 @@ namespace AdventOfCode2020
         /// </summary>
         public static void Part1()
         {
-            
+            var game = new CupGame("469217538".Select(c => int.Parse(c.ToString())).ToList());
+            for (var i = 0; i < 100; i++)
+            {
+                game.Move();
+            }
+
+            Console.WriteLine(game.ToString(1)[1..]);
         }
 
         /// <summary>
